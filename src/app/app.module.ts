@@ -17,6 +17,7 @@ import { InscriptionComponent } from './Components/Structure/inscription/inscrip
 import { MenuComponent } from './Components/Structure/menu/menu.component';
 import { FactureReadComponent } from './Components/Entities/facture-read/facture-read.component';
 import { FactureListComponent } from './Components/Entities/facture-list/facture-list.component';
+import { VueComponent } from './Components/Structure/vue/vue.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FactureListComponent } from './Components/Entities/facture-list/facture
     InscriptionComponent,
     MenuComponent,
     FactureReadComponent,
-    FactureListComponent
+    FactureListComponent,
+    VueComponent
   ],
   imports: [
     BrowserModule,

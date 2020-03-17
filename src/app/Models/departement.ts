@@ -1,7 +1,5 @@
 export class Departement {
-  constructor(
-    private idDepartement: number,
-    private nomDepartement: string,
-    private isActifDepartement: boolean
-  ) { }
+    idDepartement: number;
+    nomDepartement: string;
+    isActifDepartement: boolean;
 }

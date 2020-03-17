@@ -1,8 +1,6 @@
 export class Paiement {
-  constructor(
-    private idPaiement: number,
-    private nomPaiement: string,
-    private descPaiement: string,
-    private isActifPaiement: boolean
-  ) { }
+    idPaiement: number;
+    nomPaiement: string;
+    descPaiement: string;
+    isActifPaiement: boolean;
 }

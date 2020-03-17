@@ -1,13 +1,11 @@
 export class Facture {
-  constructor(
-    private idFacture: number,
-    private refFacture: string,
-    private dateHeure: Date,
-    private isActiveFacture: boolean,
-    private validee: boolean,
-    private total: number,
-    private totalTva: number,
-    private totalTTC: number
-  ) { }
+    idFacture: number;
+    refFacture: string;
+    dateHeure: Date;
+    isActiveFacture: boolean;
+    validee: boolean;
+    total: number;
+    totalTva: number;
+    totalTTC: number;
 }
 

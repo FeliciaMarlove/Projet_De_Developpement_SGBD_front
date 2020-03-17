@@ -1,9 +1,7 @@
 export class FactureArticles {
-  constructor(
-    private idFactureArticles: number,
-    private idFacture: number,
-    private idArticle: number,
-    private quantite: number,
-    private montantLigne: number
-  ) { }
+    idFactureArticles: number;
+    idFacture: number;
+    idArticle: number;
+    quantite: number;
+    montantLigne: number;
 }

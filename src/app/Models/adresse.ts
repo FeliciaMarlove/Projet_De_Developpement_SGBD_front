@@ -1,12 +1,10 @@
 export class Adresse {
-  constructor(
-    private idAdresse: number,
-    private rue: string,
-    private numero: number,
-    private complementNumero: string,
-    private codePostal: number,
-    private ville: string,
-    private pays: string,
-    private isActifAdresse: boolean
-  ) { }
+    idAdresse: number;
+    rue: string;
+    numero: number;
+    complementNumero: string;
+    codePostal: number;
+    ville: string;
+    pays: string;
+    isActifAdresse: boolean;
 }
