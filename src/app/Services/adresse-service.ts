@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Adresse} from '../Models/adresse';
 
@@ -11,16 +11,24 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AdresseService {
-  constructor(private http: HttpClient) {
+  private adresses: Adresse[];
+  private adresse: Adresse;
+  constructor(private http: HttpClient) { }
 
+  public getAdresses() {
+    return this.adresses;
+  }
+
+  public getAdresse() {
+    return this.adresse;
   }
 
   public readAdresses() {
-    return this.http.get(URI).subscribe();
+    return this.http.get<Adresse[]>(URI).subscribe( x => this.adresses = x);
   }
 
   public readAdresse(id: number) {
-    return this.http.get(URI + id).subscribe();
+    return this.http.get<Adresse>(URI + id).subscribe( x => this.adresse = x);
   }
 
   public createAdresse(idClient: number, adresse: Adresse) {
@@ -31,7 +39,23 @@ export class AdresseService {
        codePostal: adresse.codePostal,
        ville: adresse.ville,
        pays: adresse.pays
-    }
-    return this.http.post(URI + 'client/' + idClient, adresseDto);
+    };
+    return this.http.post(URI + 'client/' + idClient, adresseDto, httpOptions);
+  }
+
+  public updateAdresse(id: number, adresse: Adresse) {
+    const adresseDto = {
+      rue: adresse.rue,
+      numero: adresse.numero,
+      complementNumero: adresse.complementNumero,
+      codePostal: adresse.codePostal,
+      ville: adresse.ville,
+      pays: adresse.pays
+    };
+    return this.http.put(URI + id, adresseDto, httpOptions);
+  }
+
+  public deleteAdresse(id: number) {
+    return this.http.delete(URI + id);
   }
 }

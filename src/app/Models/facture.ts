@@ -1,3 +1,6 @@
+import {Client} from './client';
+import {Paiement} from './paiement';
+
 export class Facture {
     idFacture: number;
     refFacture: string;
@@ -7,5 +10,7 @@ export class Facture {
     total: number;
     totalTva: number;
     totalTTC: number;
+    client: Client;
+    paiement: Paiement;
 }
 
