@@ -19,6 +19,7 @@ import { FactureReadComponent } from './Components/Entities/facture-read/facture
 import { FactureListComponent } from './Components/Entities/facture-list/facture-list.component';
 import { VueComponent } from './Components/Structure/vue/vue.component';
 import { HttpClientModule} from '@angular/common/http';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { HttpClientModule} from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

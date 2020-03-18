@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ArticleService} from '../../../Services/article-service';
 import {Article} from '../../../Models/article';
 
@@ -8,13 +8,16 @@ import {Article} from '../../../Models/article';
   styleUrls: ['./articles-list.component.css']
 })
 export class ArticlesListComponent implements OnInit {
-  private articles: Article[];
+  @Input() private articles: Article[];
+  @Output() clickEvent: EventEmitter<Article> = new EventEmitter<Article>();
 
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
-    this.articleService.readArticles().subscribe( x => this.articles = x);
-    console.log(this.articles);
+    this.articleService.readArticles().subscribe( articles => this.articles = articles);
   }
 
+  onClick(article: Article) {
+    this.clickEvent.emit(article);
+  }
 }

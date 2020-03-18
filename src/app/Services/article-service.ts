@@ -23,6 +23,7 @@ export class ArticleService {
 
   public createArticle(idClient: number, article: Article) {
     const articleDto = {
+      nomArticle: article.nomArticle,
       descArticle: article.descArticle,
       stock: article.stock,
       prixUnitaire: article.prixUnitaire,
@@ -31,12 +32,14 @@ export class ArticleService {
     return this.http.post(URI, articleDto, httpOptions);
   }
 
-  public updateArticle(id: number, article: Article) {
+  public updateArticle(id: number, article: any) {
     const articleDto = {
+      nomArticle: article.nomArticle,
       descArticle: article.descArticle,
       stock: article.stock,
       prixUnitaire: article.prixUnitaire,
-      codeEAN: article.codeEAN
+      codeEAN: article.codeEAN,
+      idTva: article.idTva
     };
     return this.http.put(URI + id, articleDto, httpOptions);
   }
