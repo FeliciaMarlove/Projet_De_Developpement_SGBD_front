@@ -8,16 +8,21 @@ import {Article} from '../../../Models/article';
   styleUrls: ['./articles-list.component.css']
 })
 export class ArticlesListComponent implements OnInit {
-  @Input() private articles: Article[];
+  private articles: Article[];
   @Output() clickEvent: EventEmitter<Article> = new EventEmitter<Article>();
 
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
-    this.articleService.readArticles().subscribe( articles => this.articles = articles);
+    this.initArticles();
   }
 
   onClick(article: Article) {
     this.clickEvent.emit(article);
+    this.initArticles();
+  }
+
+  initArticles() {
+    this.articleService.readArticles().subscribe( articles => this.articles = articles);
   }
 }

@@ -14,8 +14,8 @@ export class ArticlesAdminComponent implements OnInit {
   private article: Article;
   private formulaire: FormGroup;
   private modifie: any;
+  private nope: string;
   private tvas: Tva[];
-  private articles: Article[];
 
   constructor(
     private fb: FormBuilder,
@@ -28,7 +28,8 @@ export class ArticlesAdminComponent implements OnInit {
   }
 
   receiveArticle(article: Article) {
-    this.modifie = false;
+    this.nope = null;
+    this.modifie = null;
     this.article = article;
     this.initForm();
     this.tvaService.readTvas().subscribe( tvas => this.tvas = tvas);
@@ -48,12 +49,41 @@ export class ArticlesAdminComponent implements OnInit {
   }
 
   modify() {
-    // check nombres entiers stock et ean ou valeur absolue direct?
-    // + ean 12 ou 13 chiffres
+    this.nope = null;
+    this.modifie = null;
     console.log(this.formulaire.value);
-    this.articleService.updateArticle(this.formulaire.controls.idArticle.value, this.formulaire.value)
-        .subscribe( reussite => this.modifie = reussite);
-    this.articleService.readArticles().subscribe( articles => this.articles = articles);
-    // la liste (child) doit reload mtnt !
+    if (this.validateEAN() && this.validateStock()) {
+      console.log(this.formulaire.value)
+      this.articleService.updateArticle(this.formulaire.controls.idArticle.value, this.formulaire.value)
+        .subscribe( reussite => {
+          this.modifie = reussite;
+          console.log(this.modifie ? 'Updated' : 'Failure in update');
+        });
+    }
+  }
+
+  private validateEAN(): boolean {
+    const ean = this.formulaire.controls.codeEAN.value;
+    const str = ean.toString();
+    console.log(str.length < 12 || str.length > 13)
+    if (str.length < 12 || str.length > 13) {
+      this.nope = 'Le code EAN doit contenir 12 ou 13 chiffres';
+      return false;
+    }
+    if (str.includes('.')) {
+      this.nope = 'Le code EAN doit être un nombre entier';
+      return false;
+    }
+    return true;
+  }
+
+  private validateStock(): boolean {
+    const stock: string = this.formulaire.controls.stock.value;
+    const str = stock.toString();
+    if (str.includes('.')) {
+      this.nope = 'Le stock doit être un nombre entier';
+      return false;
+    }
+    return true;
   }
 }

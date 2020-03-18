@@ -21,13 +21,14 @@ export class ArticleService {
     return this.http.get<Article>(URI + id);
   }
 
-  public createArticle(idClient: number, article: Article) {
+  public createArticle(idClient: number, article: any) {
     const articleDto = {
       nomArticle: article.nomArticle,
       descArticle: article.descArticle,
       stock: article.stock,
       prixUnitaire: article.prixUnitaire,
-      codeEAN: article.codeEAN
+      codeEAN: article.codeEAN,
+      idTva: article.idTva
     };
     return this.http.post(URI, articleDto, httpOptions);
   }

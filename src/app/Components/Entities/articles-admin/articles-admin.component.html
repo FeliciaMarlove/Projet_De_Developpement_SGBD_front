@@ -1,4 +1,4 @@
-<app-articles-list [articles]="articles" (clickEvent)="receiveArticle($event)"></app-articles-list>
+<app-articles-list (clickEvent)="receiveArticle($event)"></app-articles-list>
 <section class="inadmin">
   <h4>Modifier, ajouter ou supprimer des articles</h4>
   <section class="modifier" *ngIf="article">
@@ -13,7 +13,7 @@
       <input type="number" min="0" formControlName="stock"> <br>
       <label of="prixUnitaire">P.U. </label>
       <input type="number" min="0" formControlName="prixUnitaire"> <br>
-      <label of="codeEan">Code EAN </label>
+      <label of="codeEAN">Code EAN </label>
       <input type="number" formControlName="codeEAN"> <br>
       <label of="idTva">TVA</label>
       <select formControlName="idTva">
@@ -22,6 +22,7 @@
       <br>
       <button type="submit" [disabled]="formulaire.invalid || formulaire.pristine">Modifier</button>
     </form>
-    <p *ngIf="modifie">Mise à jour effectuée !</p>
+    <p *ngIf="nope && !modifie">{{ nope }}</p>
+    <p *ngIf="modifie && !nope">Mise à jour effectuée !</p>
   </section>
 </section>
