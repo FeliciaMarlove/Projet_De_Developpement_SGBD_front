@@ -11,24 +11,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TvaService {
-  private tvas: Tva[];
-  private tva: Tva;
   constructor(private http: HttpClient) { }
 
-  public getTvas() {
-    return this.tvas;
-  }
-
-  public getTva() {
-    return this.tva;
-  }
-
   public readTvas() {
-    return this.http.get<Tva[]>(URI).subscribe( x => this.tvas = x);
+    return this.http.get<Tva[]>(URI);
   }
 
   public readTva(id: number) {
-    return this.http.get<Tva>(URI + id).subscribe( x => this.tva = x);
+    return this.http.get<Tva>(URI + id);
   }
 
   public createTva(tva: Tva) {

@@ -11,24 +11,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ClientService {
-  private clients: Client[];
-  private client: Client;
   constructor(private http: HttpClient) { }
 
-  public getClients() {
-    return this.clients;
-  }
-
-  public getClient() {
-    return this.client;
-  }
-
   public readClients() {
-    return this.http.get<Client[]>(URI).subscribe( x => this.clients = x);
+    return this.http.get<Client[]>(URI);
   }
 
   public readClient(id: number) {
-    return this.http.get<Client>(URI + id).subscribe( x => this.client = x);
+    return this.http.get<Client>(URI + id);
   }
 
   public createClient(idClient: number, client: Client) {

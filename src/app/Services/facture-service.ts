@@ -11,24 +11,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class FactureService {
-  private factures: Facture[];
-  private facture: Facture;
   constructor(private http: HttpClient) { }
 
-  public getFactures() {
-    return this.factures;
-  }
-
-  public getFacture() {
-    return this.facture;
-  }
-
   public readFactures() {
-    return this.http.get<Facture[]>(URI).subscribe( x => this.factures = x);
+    return this.http.get<Facture[]>(URI);
   }
 
   public readFacture(id: number) {
-    return this.http.get<Facture>(URI + id).subscribe( x => this.facture = x);
+    return this.http.get<Facture>(URI + id);
   }
 
   public createFacture(idClient: number, facture: Facture) {

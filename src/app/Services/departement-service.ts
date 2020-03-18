@@ -11,24 +11,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class DepartementService {
-  private departements: Departement[];
-  private departement: Departement;
   constructor(private http: HttpClient) { }
 
-  public getDepartements() {
-    return this.departements;
-  }
-
-  public getDepartement() {
-    return this.departement;
-  }
-
   public readDepartements() {
-    return this.http.get<Departement[]>(URI).subscribe( x => this.departements = x);
+    return this.http.get<Departement[]>(URI);
   }
 
   public readDepartement(id: number) {
-    return this.http.get<Departement>(URI + id).subscribe( x => this.departement = x);
+    return this.http.get<Departement>(URI + id);
   }
 
   public createDepartement(idClient: number, departement: Departement) {

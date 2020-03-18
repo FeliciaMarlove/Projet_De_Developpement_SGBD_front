@@ -18,6 +18,7 @@ import { MenuComponent } from './Components/Structure/menu/menu.component';
 import { FactureReadComponent } from './Components/Entities/facture-read/facture-read.component';
 import { FactureListComponent } from './Components/Entities/facture-list/facture-list.component';
 import { VueComponent } from './Components/Structure/vue/vue.component';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { VueComponent } from './Components/Structure/vue/vue.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

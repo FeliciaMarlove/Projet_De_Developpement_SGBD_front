@@ -11,24 +11,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ArticleService {
-  private articles: Article[];
-  private article: Article;
   constructor(private http: HttpClient) { }
 
-  public getArticles() {
-    return this.articles;
-  }
-
-  public getArticle() {
-    return this.article;
-  }
-
   public readArticles() {
-    return this.http.get<Article[]>(URI).subscribe( x => this.articles = x);
+    return this.http.get<Article[]>(URI);
   }
 
   public readArticle(id: number) {
-    return this.http.get<Article>(URI + id).subscribe( x => this.article = x);
+    return this.http.get<Article>(URI + id);
   }
 
   public createArticle(idClient: number, article: Article) {

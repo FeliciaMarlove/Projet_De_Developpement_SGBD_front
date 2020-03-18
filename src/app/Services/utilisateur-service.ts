@@ -11,24 +11,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UtilisateurService {
-  private utilisateurs: Utilisateur[];
-  private utilisateur: Utilisateur;
   constructor(private http: HttpClient) { }
 
-  public getUtilisateurs() {
-    return this.utilisateurs;
-  }
-
-  public getUtilisateur() {
-    return this.utilisateur;
-  }
-
   public readUtilisateurs() {
-    return this.http.get<Utilisateur[]>(URI).subscribe( x => this.utilisateurs = x);
+    return this.http.get<Utilisateur[]>(URI);
   }
 
   public readUtilisateur(id: number) {
-    return this.http.get<Utilisateur>(URI + id).subscribe( x => this.utilisateur = x);
+    return this.http.get<Utilisateur>(URI + id);
   }
 
   public createUtilisateur(utilisateur: Utilisateur) {

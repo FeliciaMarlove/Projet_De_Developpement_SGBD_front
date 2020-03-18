@@ -11,24 +11,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AdresseService {
-  private adresses: Adresse[];
-  private adresse: Adresse;
   constructor(private http: HttpClient) { }
 
-  public getAdresses() {
-    return this.adresses;
-  }
-
-  public getAdresse() {
-    return this.adresse;
-  }
-
   public readAdresses() {
-    return this.http.get<Adresse[]>(URI).subscribe( x => this.adresses = x);
+    return this.http.get<Adresse[]>(URI);
   }
 
   public readAdresse(id: number) {
-    return this.http.get<Adresse>(URI + id).subscribe( x => this.adresse = x);
+    return this.http.get<Adresse>(URI + id);
   }
 
   public createAdresse(idClient: number, adresse: Adresse) {

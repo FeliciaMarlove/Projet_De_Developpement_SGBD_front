@@ -11,24 +11,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class PaiementService {
-  private paiements: Paiement[];
-  private paiement: Paiement;
   constructor(private http: HttpClient) { }
 
-  public getPaiements() {
-    return this.paiements;
-  }
-
-  public getPaiement() {
-    return this.paiement;
-  }
-
   public readPaiements() {
-    return this.http.get<Paiement[]>(URI).subscribe( x => this.paiements = x);
+    return this.http.get<Paiement[]>(URI);
   }
 
   public readPaiement(id: number) {
-    return this.http.get<Paiement>(URI + id).subscribe( x => this.paiement = x);
+    return this.http.get<Paiement>(URI + id);
   }
 
   public createPaiement(paiement: Paiement) {
