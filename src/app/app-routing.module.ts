@@ -25,14 +25,10 @@ const routes: Routes = [
       { path: 'vue', component: VueComponent,
         children : [
           { path: 'articles', component: ArticlesAdminComponent},
-          { path: 'articles-list', component: ArticlesListComponent},
           { path: 'clients', component: ClientsAdminComponent},
-          { path: 'clients-list', component: ClientsListComponent},
           { path: 'facture', component: FactureAdminComponent},
-          { path: 'facture-list', component: FactureListComponent},
           { path: 'facture-view', component: FactureReadComponent},
           { path: 'utilisateurs', component: UtilisateursAdminComponent},
-          { path: 'utilisateurs-list', component: UtilisateursListComponent}
         ]
       }
     ]},
