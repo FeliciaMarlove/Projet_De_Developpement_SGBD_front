@@ -25,4 +25,8 @@ export class ArticlesListComponent implements OnInit {
   initArticles() {
     this.articleService.readArticles().subscribe( articles => this.articles = articles);
   }
+
+  onRefresh() {
+    this.initArticles();
+  }
 }

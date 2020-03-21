@@ -21,7 +21,7 @@ export class ArticleService {
     return this.http.get<Article>(URI + id);
   }
 
-  public createArticle(idClient: number, article: any) {
+  public createArticle(article: any) {
     const articleDto = {
       nomArticle: article.nomArticle,
       descArticle: article.descArticle,

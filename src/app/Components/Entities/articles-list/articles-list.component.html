@@ -1,2 +1,5 @@
 <h4>Articles</h4>
 <div *ngFor="let article of articles" (click)="onClick(article)">{{ article.nomArticle }}</div>
+
+<br>
+<button (click)="onRefresh()">Mettre à jour</button>
