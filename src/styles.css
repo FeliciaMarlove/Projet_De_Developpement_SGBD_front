@@ -21,6 +21,10 @@ app-articles-admin, app-clients-admin, app-facture-admin, app-utilisateurs-admin
     "ls ct ct ct";
 }
 
+app-header {
+  text-align: center;
+}
+
 app-articles-list, app-clients-list, app-facture-list, app-utilisateurs-list {
   grid-area: ls;
   border-color: black;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Utilisateur} from '../../../Models/utilisateur';
 import {UtilisateurService} from '../../../Services/utilisateur-service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-vue',

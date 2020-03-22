@@ -1,1 +1,8 @@
-<p>menu works!</p>
+<h3>Menu</h3>
+<button (click)="router.navigateByUrl('dashboard/vue/articles')">Articles</button>
+<button (click)="router.navigateByUrl('dashboard/vue/clients')">Clients</button>
+<button (click)="router.navigateByUrl('dashboard/vue/utilisateurs')">Utilisateurs</button>
+<button (click)="router.navigateByUrl('dashboard/vue/factures')">Factures</button>
+<br>
+<button (click)="router.navigateByUrl('/dashboard/vue')">Accueil</button>
+<button (click)="onLogout()">Se déconnecter</button>

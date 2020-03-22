@@ -26,7 +26,7 @@ const routes: Routes = [
         children : [
           { path: 'articles', component: ArticlesAdminComponent},
           { path: 'clients', component: ClientsAdminComponent},
-          { path: 'facture', component: FactureAdminComponent},
+          { path: 'factures', component: FactureAdminComponent},
           { path: 'facture-view', component: FactureReadComponent},
           { path: 'utilisateurs', component: UtilisateursAdminComponent},
         ]
