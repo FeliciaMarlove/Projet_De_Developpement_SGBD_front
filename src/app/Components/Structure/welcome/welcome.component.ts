@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../../../Services/login-service';
 import {Router} from '@angular/router';
+import {Utilisateur} from '../../../Models/utilisateur';
 
 @Component({
   selector: 'app-welcome',
@@ -9,8 +10,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
-  loginForm: FormGroup;
-  message: string;
+  private loginForm: FormGroup;
+  private message: string;
+  private connectedUser: Utilisateur;
 
   constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
 
@@ -26,7 +28,10 @@ export class WelcomeComponent implements OnInit {
     this.loginService.login(this.loginForm.controls.login.value, this.loginForm.controls.motDePasse.value).subscribe( connectMsgr => {
        // console.log(connectMsgr);
        this.message = connectMsgr.message;
-       if (connectMsgr.success) { this.router.navigateByUrl('dashboard/vue'); }
+       if (connectMsgr.success) {
+         localStorage.setItem('user', JSON.stringify({login: this.connectedUser.login}));
+         this.router.navigateByUrl('dashboard/vue');
+       }
     });
   }
 

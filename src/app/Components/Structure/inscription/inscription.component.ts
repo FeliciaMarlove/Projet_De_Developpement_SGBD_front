@@ -4,6 +4,7 @@ import {UtilisateurService} from '../../../Services/utilisateur-service';
 import {Router} from '@angular/router';
 import {DepartementService} from '../../../Services/departement-service';
 import {Departement} from '../../../Models/departement';
+import {Utilisateur} from '../../../Models/utilisateur';
 
 @Component({
   selector: 'app-inscription',
@@ -14,10 +15,15 @@ export class InscriptionComponent implements OnInit {
   private signupForm: FormGroup;
   private departements: Departement[];
   private success: boolean;
-  private userDto: any;
   private message: string;
+  private connectedUser: Utilisateur;
 
-  constructor(private router: Router, private userService: UtilisateurService, private fb: FormBuilder, private deptService: DepartementService) { }
+  constructor(
+    private router: Router,
+    private userService: UtilisateurService,
+    private fb: FormBuilder,
+    private deptService: DepartementService
+  ) { }
 
   ngOnInit() {
     this.deptService.readDepartements().subscribe(departements => {
@@ -37,8 +43,9 @@ export class InscriptionComponent implements OnInit {
   onSignup() {
     this.message = null;
     this.userService.createUtilisateur(this.signupForm.value).subscribe( userDto => {
-      if (userDto != null) {this.success = true; } else { this.success = false; this.message = 'Vous avez déjà un compte, connectez-vous'; }
-      this.userDto = userDto;
+        if (userDto != null) {this.success = true; localStorage.setItem('user', JSON.stringify({login: this.connectedUser.login}));
+        } else { this.success = false; this.message = 'Vous avez déjà un compte, connectez-vous';
+        }
     });
   }
 
