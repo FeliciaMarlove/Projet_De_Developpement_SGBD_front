@@ -1,2 +1,23 @@
-<p>utilisateurs-admin works!</p>
-<app-utilisateurs-list></app-utilisateurs-list>
+<app-utilisateurs-list (clickEvent)="receiveUtilisateur($event)"></app-utilisateurs-list>
+<section class="inadmin">
+  <h4>Modifier, ajouter ou supprimer des utilisateurs</h4>
+  <p>Sélectionnez un utilisateur pour modifier</p>
+  <section class="modifier" *ngIf="utilisateurDto">
+    <form [formGroup]="formulaireMod" (ngSubmit)="onModify()">
+      <label of="prenomUtilisateur">Prénom</label>
+      <input formControlName="prenomUtilisateur"> <br>
+      <label of="nomUtilisateur">Nom</label>
+      <input formControlName="nomUtilisateur"> <br>
+      <label of="login">Identifiant</label>
+      <input formControlName="login"> <br>
+      <label of="poste">Poste</label>
+      <input formControlName="poste"> <br>
+      <label of="nomDepartement">Département</label>
+      <select formControlName="nomDepartement">
+        <option *ngFor="let dept of departements" value = {{dept.nomDepartement}}>{{dept?.nomDepartement}}</option>
+      </select>
+      <br>
+      <button type="submit" [disabled]="formulaireMod.pristine || formulaireMod.invalid">Modifier</button>
+    </form>
+  </section>
+</section>

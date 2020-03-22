@@ -22,26 +22,19 @@ export class UtilisateurService {
   }
 
   public createUtilisateur(utilisateur: any) {
-    const utilisateurDto = {
-      nomUtilisateur: utilisateur.nomUtilisateur,
-      prenomUtilisateur: utilisateur.prenomUtilisateur,
-      login: utilisateur.login,
-      motDePasse: utilisateur.motDePasse,
-      poste: utilisateur.poste,
-      nomDepartement: utilisateur.nomDepartement
-    };
-    return this.http.post(URI, utilisateurDto, httpOptions);
+    // const utilisateurDto = {
+    //   nomUtilisateur: utilisateur.nomUtilisateur,
+    //   prenomUtilisateur: utilisateur.prenomUtilisateur,
+    //   login: utilisateur.login,
+    //   motDePasse: utilisateur.motDePasse,
+    //   poste: utilisateur.poste,
+    //   nomDepartement: utilisateur.nomDepartement
+    // };
+    return this.http.post(URI, utilisateur, httpOptions);
   }
 
-  public updateUtilisateur(id: number, utilisateur: Utilisateur) {
-    const utilisateurDto = {
-      nomUtilisateur: utilisateur.nomUtilisateur,
-      prenomUtilisateur: utilisateur.prenomUtilisateur,
-      login: utilisateur.login,
-      motDePasse: utilisateur.motDePasse,
-      poste: utilisateur.poste
-    };
-    return this.http.put(URI + id, utilisateurDto, httpOptions);
+  public updateUtilisateur(login: string, utilisateurDto: any) {
+    return this.http.put(URI + login, utilisateurDto, httpOptions);
   }
 
   public deleteUtilisateur(id: number) {

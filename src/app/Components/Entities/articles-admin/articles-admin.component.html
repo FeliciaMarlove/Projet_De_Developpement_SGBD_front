@@ -1,11 +1,9 @@
 <app-articles-list (clickEvent)="receiveArticle($event)"></app-articles-list>
 <section class="inadmin">
   <h4>Modifier, ajouter ou supprimer des articles</h4>
-  <p>Sélectionner un article pour modifier</p>
+  <p>Sélectionnez un article pour modifier</p>
   <section class="modifier" *ngIf="article">
     <form [formGroup]="formulaireMod" (ngSubmit)="onModify()">
-      <label of="idArticle">ID article </label>
-      <input formControlName="idArticle" disabled> <br>
       <label of="nomArticle">Désignation </label>
       <input formControlName="nomArticle"> <br>
       <label of="descArticle">Description </label>

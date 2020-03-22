@@ -1,1 +1,5 @@
-<p>utilisateurs-list works!</p>
+<h4>Utilisateurs</h4>
+<div *ngFor="let util of utilisateurs" (click)="onClick(util)"> {{util.prenomUtilisateur}} {{util.nomUtilisateur}} ● {{util.login}}</div>
+
+<br>
+<button (click)="onRefresh()">Mettre à jour</button>

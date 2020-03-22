@@ -4,7 +4,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ArticleService} from '../../../Services/article-service';
 import {TvaService} from '../../../Services/tva-service';
 import {Tva} from '../../../Models/tva';
-import {ArticlesListComponent} from '../articles-list/articles-list.component';
 
 @Component({
   selector: 'app-articles-admin',
@@ -19,8 +18,6 @@ export class ArticlesAdminComponent implements OnInit {
   private nope: string;
   private tvas: Tva[];
   private showAdd: boolean;
-  // @ts-ignore
-  @ViewChild(ArticlesListComponent) child: ArticlesListComponent;
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +38,6 @@ export class ArticlesAdminComponent implements OnInit {
 
   initForm() {
     this.formulaireMod = this.fb.group({
-      idArticle: [this.article.idArticle],
       nomArticle: [this.article.nomArticle, [Validators.required]],
       descArticle: [this.article.descArticle, [Validators.required]],
       stock: [this.article.stock, [Validators.required]],
@@ -72,7 +68,6 @@ export class ArticlesAdminComponent implements OnInit {
         console.log('article créé', newArticle);
       });
     }
-    this.child.initArticles();
   }
 
   onDelete() {
