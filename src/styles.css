@@ -25,6 +25,16 @@ app-header {
   text-align: center;
 }
 
+app-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+app-menu button {
+  max-width: 150px;
+  height: 50px;
+}
+
 app-articles-list, app-clients-list, app-facture-list, app-utilisateurs-list {
   grid-area: ls;
   border-color: black;
