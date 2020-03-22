@@ -1,1 +1,23 @@
-<p>inscription works!</p>
+<p>Nouvel utilisateur</p>
+<br>
+<form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+  <input formControlName="nomUtilisateur" placeholder="Nom de famille">
+  <br>
+  <input formControlName="prenomUtilisateur" placeholder="Prénom">
+  <br>
+  <input formControlName="login" placeholder="Identifiant">
+  <br>
+  <input formControlName="motDePasse" placeholder="motDePasse" type="password">
+  <br>
+  <input formControlName="poste" placeholder="Poste/Titre">
+  <br>
+  <select formControlName="nomDepartement">
+    <option *ngFor="let dep of departements" value = {{dep.nomDepartement}}>{{ dep.nomDepartement }}</option>
+  </select>
+  <button type="submit" [disabled]=" signupForm.pristine || signupForm.invalid">S'enregistrer</button>
+</form>
+
+<p *ngIf="success">Notez bien vos informations de connexion : <br>
+Identifiant : {{signupForm.controls.login.value}} <br>Mot de passe : {{signupForm.controls.motDePasse.value}}</p>
+<br>
+<button (click)="accessToDash()" *ngIf="success">Accéder à mon espace utilisateur</button>

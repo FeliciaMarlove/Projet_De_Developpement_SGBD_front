@@ -21,13 +21,14 @@ export class UtilisateurService {
     return this.http.get<Utilisateur>(URI + id);
   }
 
-  public createUtilisateur(utilisateur: Utilisateur) {
+  public createUtilisateur(utilisateur: any) {
     const utilisateurDto = {
       nomUtilisateur: utilisateur.nomUtilisateur,
       prenomUtilisateur: utilisateur.prenomUtilisateur,
       login: utilisateur.login,
       motDePasse: utilisateur.motDePasse,
-      poste: utilisateur.poste
+      poste: utilisateur.poste,
+      nomDepartement: utilisateur.nomDepartement
     };
     return this.http.post(URI, utilisateurDto, httpOptions);
   }
