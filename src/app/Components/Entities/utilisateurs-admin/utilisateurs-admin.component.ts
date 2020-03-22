@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Utilisateur} from '../../../Models/utilisateur';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Departement} from '../../../Models/departement';
 import {UtilisateurService} from '../../../Services/utilisateur-service';
@@ -31,11 +30,9 @@ export class UtilisateursAdminComponent implements OnInit {
   }
 
   receiveUtilisateur(utilisateur: any) {
-    console.log(utilisateur)
     this.nope = null;
     this.success = null;
     this.utilisateurDto = utilisateur;
-    console.log(this.utilisateurDto)
     this.departementService.readDepartement(utilisateur.nomDepartement).subscribe( d => {
       this.departement = d;
       this.initForm();
@@ -43,7 +40,6 @@ export class UtilisateursAdminComponent implements OnInit {
   }
 
   initForm() {
-    console.log(this.utilisateurDto)
     this.formulaireMod = this.fb.group({
       nomUtilisateur: [this.utilisateurDto.nomUtilisateur, Validators.required],
       prenomUtilisateur: [this.utilisateurDto.prenomUtilisateur, Validators.required],
@@ -51,7 +47,6 @@ export class UtilisateursAdminComponent implements OnInit {
       poste: [this.utilisateurDto.poste, Validators.required],
       nomDepartement: [this.departement.nomDepartement, Validators.required]
     });
-    console.log(this.formulaireMod.value)
   }
 
   onShowAddSection() {
@@ -85,7 +80,6 @@ export class UtilisateursAdminComponent implements OnInit {
   }
 
   onModify() {
-    console.log(this.formulaireMod.value)
     this.nope = null;
     this.success = null;
     this.utilisateurService.updateUtilisateur(this.formulaireMod.controls.login.value, this.formulaireMod.value)

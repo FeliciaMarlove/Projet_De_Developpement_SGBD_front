@@ -2,7 +2,7 @@
 <section class="inadmin">
   <h4>Modifier, ajouter ou supprimer des utilisateurs</h4>
   <p>Sélectionnez un utilisateur pour modifier</p>
-  <section class="modifier" *ngIf="utilisateurDto">
+  <section class="modifier" *ngIf="utilisateurDto && formulaireMod">
     <form [formGroup]="formulaireMod" (ngSubmit)="onModify()">
       <label of="prenomUtilisateur">Prénom</label>
       <input formControlName="prenomUtilisateur"> <br>
@@ -17,7 +17,7 @@
         <option *ngFor="let dept of departements" value = {{dept.nomDepartement}}>{{dept?.nomDepartement}}</option>
       </select>
       <br>
-      <button type="submit" [disabled]="formulaireMod.pristine || formulaireMod.invalid">Modifier</button>
+      <button type="submit" [disabled]="formulaireMod?.pristine || formulaireMod?.invalid">Modifier</button>
     </form>
   </section>
 </section>
