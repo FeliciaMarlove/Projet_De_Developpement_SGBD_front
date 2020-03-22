@@ -35,8 +35,9 @@ export class InscriptionComponent implements OnInit {
   }
 
   onSignup() {
+    this.message = null;
     this.userService.createUtilisateur(this.signupForm.value).subscribe( userDto => {
-      if(userDto != null) {this.success = true; } else { this.success = false; }
+      if (userDto != null) {this.success = true; } else { this.success = false; this.message = 'Vous avez déjà un compte, connectez-vous'; }
       this.userDto = userDto;
     });
   }

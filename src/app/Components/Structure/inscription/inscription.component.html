@@ -17,6 +17,9 @@
   <button type="submit" [disabled]=" signupForm.pristine || signupForm.invalid">S'enregistrer</button>
 </form>
 
+<p *ngIf="message">{{message}}</p>
+<button *ngIf="message" (click)="router.navigateByUrl('')">Se connecter</button>
+
 <p *ngIf="success">Notez bien vos informations de connexion : <br>
 Identifiant : {{signupForm.controls.login.value}} <br>Mot de passe : {{signupForm.controls.motDePasse.value}}</p>
 <br>
