@@ -13,9 +13,9 @@ const httpOptions = {
 export class LoginService {
   constructor(private http: HttpClient) { }
 
-  public login(email: string, password: string) {
+  public login(log: string, password: string): any {
     const loginDto = {
-      eMail: email,
+      login: log,
       motDePasse: password
     };
     return this.http.post(URI, loginDto, httpOptions);

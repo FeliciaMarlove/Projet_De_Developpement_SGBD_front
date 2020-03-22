@@ -1,1 +1,13 @@
-<p>welcome works!</p>
+<h2>Brico-Shop</h2>
+<p>Connectez-vous pour accéder à l'application</p>
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <br>
+  <input formControlName="login" placeholder="Nom d'utilisateur">
+  <br>
+  <input formControlName="motDePasse" placeholder="Mot de passe" type="password">
+  <br>
+  <button type="submit" [disabled]="loginForm.invalid">Se connecter</button>
+  <p *ngIf="message" style="color: red"> {{ message }}</p>
+</form>
+<p>Nouvel utilisateur ?</p>
+<button type="submit" (click)="onSignUp()">Créer un compte</button>

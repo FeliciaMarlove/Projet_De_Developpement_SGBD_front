@@ -17,8 +17,8 @@ import {UtilisateursListComponent} from './Components/Entities/utilisateurs-list
 
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent}, // for testing purpose, to erase
-  // { path: '', component: WelcomeComponent}, // commented for testing purpose
+  // { path: '', component: DashboardComponent}, // for testing purpose, to erase
+   { path: '', component: WelcomeComponent}, // commented for testing purpose
   { path: 'signup', component: InscriptionComponent},
   // dashboard -> canActivate: [AuthGuard]
   { path: 'dashboard', component: DashboardComponent, children : [
