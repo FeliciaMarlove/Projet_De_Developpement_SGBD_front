@@ -16,7 +16,6 @@ export class InscriptionComponent implements OnInit {
   private departements: Departement[];
   private success: boolean;
   private message: string;
-  private connectedUser: Utilisateur;
 
   constructor(
     private router: Router,
@@ -28,7 +27,6 @@ export class InscriptionComponent implements OnInit {
   ngOnInit() {
     this.deptService.readDepartements().subscribe(departements => {
       this.departements = departements;
-      console.log(departements);
     });
     this.signupForm = this.fb.group({
       nomUtilisateur: ['', Validators.required],
@@ -43,7 +41,9 @@ export class InscriptionComponent implements OnInit {
   onSignup() {
     this.message = null;
     this.userService.createUtilisateur(this.signupForm.value).subscribe( userDto => {
-        if (userDto != null) {this.success = true; localStorage.setItem('user', JSON.stringify({login: this.connectedUser.login}));
+        if (userDto != null) {
+          this.success = true;
+          sessionStorage.setItem('user', JSON.stringify({login: this.signupForm.controls.login.value}));
         } else { this.success = false; this.message = 'Vous avez déjà un compte, connectez-vous';
         }
     });

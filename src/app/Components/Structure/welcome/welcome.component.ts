@@ -12,7 +12,6 @@ import {Utilisateur} from '../../../Models/utilisateur';
 export class WelcomeComponent implements OnInit {
   private loginForm: FormGroup;
   private message: string;
-  private connectedUser: Utilisateur;
 
   constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
 
@@ -29,7 +28,7 @@ export class WelcomeComponent implements OnInit {
        // console.log(connectMsgr);
        this.message = connectMsgr.message;
        if (connectMsgr.success) {
-         localStorage.setItem('user', JSON.stringify({login: this.connectedUser.login}));
+         sessionStorage.setItem('user', JSON.stringify({login: this.loginForm.controls.login.value}));
          this.router.navigateByUrl('dashboard/vue');
        }
     });
