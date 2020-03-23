@@ -16,12 +16,13 @@
       <select formControlName="nomDepartement">
         <option *ngFor="let dept of departements" value = {{dept.nomDepartement}}>{{dept?.nomDepartement}}</option>
       </select>
-      <br>
+      <br> <br>
       <button type="submit" [disabled]="formulaireMod?.pristine || formulaireMod?.invalid">Modifier</button>
       <br>
       <button (click)="onDelete()">Effacer l'utilisateur</button>
     </form>
   </section>
+  <br><br>
   <button (click)="onShowAddSection()">Ajouter un utilisateur</button>
   <form *ngIf="showAdd" [formGroup]="formulaireAdd" (ngSubmit)="onAdd()">
     <label of="prenomUtilisateur">Prénom</label>
@@ -38,6 +39,7 @@
     <select formControlName="nomDepartement">
       <option *ngFor="let dept of departements" value = {{dept.nomDepartement}}>{{dept?.nomDepartement}}</option>
     </select>
+    <br>
     <button type="submit">Créer</button> <br>
     <p *ngIf="confirmation"> {{confirmation}}</p>
   </form>

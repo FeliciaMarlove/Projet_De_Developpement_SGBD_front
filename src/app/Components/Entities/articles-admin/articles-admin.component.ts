@@ -103,7 +103,7 @@ export class ArticlesAdminComponent implements OnInit {
   }
 
   private validateStock(formulaire: FormGroup): boolean {
-    const stock: string = formulaire.controls.stock.value;
+    const stock = formulaire.controls.stock.value;
     const str = stock.toString();
     if (str.includes('.')) {
       this.nope = 'Le stock doit être un nombre entier';

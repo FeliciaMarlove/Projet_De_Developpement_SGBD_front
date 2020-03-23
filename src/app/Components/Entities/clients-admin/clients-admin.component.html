@@ -1,2 +1,40 @@
-<p>clients-admin works!</p>
-<app-clients-list></app-clients-list>
+<app-clients-list (clickEvent)="receiveClient($event)"></app-clients-list>
+<section class="inadmin">
+  <h4>Modifier, ajouter ou supprimer des clients</h4>
+  <p>Sélectionnez un client pour modifier</p>
+  <section class="modifier" *ngIf="clientDto">
+    <form [formGroup]="formulaireMod" (ngSubmit)="onModify()">
+      <label of="nomClient">Nom</label>
+      <input formControlName="nomClient"> <br>
+      <label of="prenomClient">Prénom</label>
+      <input formControlName="prenomClient"> <br>
+      <label of="telephoneClient">Téléphone</label>
+      <input formControlName="telephoneClient" type="number" min="0"> <br>
+      <label of="dateNaissanceClient">Date de naissance</label>
+      <input formControlName="dateNaissanceClient" type="date">
+      <br>
+      <button type="submit" [disabled]="formulaireMod.pristine || formulaireMod.invalid">Modifier</button>
+    </form>
+    <p *ngIf="nope && !success">{{ nope }}</p>
+    <p *ngIf="success && !nope">Mise à jour effectuée !</p>
+    <button (click)="onDelete()">Supprimer le client</button>
+  </section>
+  <br>
+  <button (click)="onShowAddSection()">Ajouter un client</button>
+  <section *ngIf="showAdd" class="ajouter">
+    <form [formGroup]="formulaireAdd" (ngSubmit)="onAdd()">
+      <label of="nomClient">Nom</label>
+      <input formControlName="nomClient"> <br>
+      <label of="prenomClient">Prénom</label>
+      <input formControlName="prenomClient"> <br>
+      <label of="telephoneClient">Téléphone</label>
+      <input formControlName="telephoneClient" type="number" min="0"> <br>
+      <label of="dateNaissanceClient">Date de naissance</label>
+      <input formControlName="dateNaissanceClient" type="date">
+      <br>
+      <button type="submit" [disabled]="formulaireAdd.pristine || formulaireAdd.invalid">Ajouter</button>
+    </form>
+    <p *ngIf="nope && !success">{{ nope }}</p>
+    <p *ngIf="success && !nope">Client ajouté !</p>
+  </section>
+</section>

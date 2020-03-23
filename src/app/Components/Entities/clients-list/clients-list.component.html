@@ -1,1 +1,4 @@
-<p>clients-list works!</p>
+<h4>Clients</h4>
+<div *ngFor="let client of clients" (click)="onClick(client)">{{client.nomClient}} {{client.prenomClient}}</div>
+<br>
+<button (click)="onRefresh()">Mettre à jour</button>

@@ -2,7 +2,8 @@ export class Client {
     idClient: number;
     nomClient: string;
     prenomClient: string;
-    telephone: string;
-    dateNaissanceClient: Date;
+  telephoneClient: string;
+    // @ts-ignore
+  dateNaissanceClient: Date;
     isActifClient: boolean;
 }
