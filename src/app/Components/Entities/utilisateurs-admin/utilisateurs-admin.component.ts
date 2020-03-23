@@ -18,6 +18,7 @@ export class UtilisateursAdminComponent implements OnInit {
   private nope: string;
   private success: any;
   private departement: Departement;
+  private confirmation: string;
 
   constructor(
     private fb: FormBuilder,
@@ -62,6 +63,7 @@ export class UtilisateursAdminComponent implements OnInit {
   }
 
   onAdd() {
+    this.confirmation = null;
     this.nope = null;
     this.success = null;
     this.utilisateurService.createUtilisateur(this.formulaireAdd.value)
@@ -69,6 +71,7 @@ export class UtilisateursAdminComponent implements OnInit {
         if (newUser != null) {
           this.success = true;
           console.log('nouvel utilisateur créé', newUser);
+          this.confirmation  = 'Nouvel utilisateur créé, notez bien les informations de connexion : ' + this.formulaireAdd.controls.login.value + ' | Mot de passe : ' + this.formulaireAdd.controls.motDePasse.value;
         } else {
           this.nope = 'L\'utilisateur existe déjà';
         }
@@ -76,7 +79,7 @@ export class UtilisateursAdminComponent implements OnInit {
   }
 
   onDelete() {
-    this.utilisateurService.deleteUtilisateur(this.utilisateurDto.idUtilisateur).subscribe();
+    this.utilisateurService.deleteUtilisateur(this.utilisateurDto.login).subscribe();
   }
 
   onModify() {

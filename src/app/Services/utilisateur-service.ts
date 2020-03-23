@@ -21,15 +21,7 @@ export class UtilisateurService {
     return this.http.get<Utilisateur>(URI + id);
   }
 
-  public createUtilisateur(utilisateur: any) {
-    // const utilisateurDto = {
-    //   nomUtilisateur: utilisateur.nomUtilisateur,
-    //   prenomUtilisateur: utilisateur.prenomUtilisateur,
-    //   login: utilisateur.login,
-    //   motDePasse: utilisateur.motDePasse,
-    //   poste: utilisateur.poste,
-    //   nomDepartement: utilisateur.nomDepartement
-    // };
+  public createUtilisateur(utilisateur: any): any {
     return this.http.post(URI, utilisateur, httpOptions);
   }
 
@@ -37,7 +29,7 @@ export class UtilisateurService {
     return this.http.put(URI + login, utilisateurDto, httpOptions);
   }
 
-  public deleteUtilisateur(id: number) {
-    return this.http.delete(URI + id);
+  public deleteUtilisateur(login: string) {
+    return this.http.delete(URI + login);
   }
 }

@@ -18,6 +18,27 @@
       </select>
       <br>
       <button type="submit" [disabled]="formulaireMod?.pristine || formulaireMod?.invalid">Modifier</button>
+      <br>
+      <button (click)="onDelete()">Effacer l'utilisateur</button>
     </form>
   </section>
+  <button (click)="onShowAddSection()">Ajouter un utilisateur</button>
+  <form *ngIf="showAdd" [formGroup]="formulaireAdd" (ngSubmit)="onAdd()">
+    <label of="prenomUtilisateur">Prénom</label>
+    <input formControlName="prenomUtilisateur"> <br>
+    <label of="nomUtilisateur">Nom</label>
+    <input formControlName="nomUtilisateur"> <br>
+    <label of="login">Identifiant</label>
+    <input formControlName="login"> <br>
+    <label of="motDePasse">Mot de passe</label>
+    <input formControlName="motDePasse" type="password"> <br>
+    <label of="poste">Poste</label>
+    <input formControlName="poste"> <br>
+    <label of="nomDepartement">Département</label>
+    <select formControlName="nomDepartement">
+      <option *ngFor="let dept of departements" value = {{dept.nomDepartement}}>{{dept?.nomDepartement}}</option>
+    </select>
+    <button type="submit">Créer</button> <br>
+    <p *ngIf="confirmation"> {{confirmation}}</p>
+  </form>
 </section>
