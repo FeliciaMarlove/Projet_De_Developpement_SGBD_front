@@ -17,7 +17,18 @@
     </form>
     <p *ngIf="nope && !success">{{ nope }}</p>
     <p *ngIf="success && !nope">Mise à jour effectuée !</p>
+    <br>
     <button (click)="onDelete()">Supprimer le client</button>
+    <br>
+    <p>Gérer les adresses</p>
+    <section style="font-size: 13px; border: 1px dimgrey solid; padding: 2px">
+      <p *ngFor="let adss of adressesDtos" (click)="onSelectAdss(adss)">{{adss.rue}} {{adss.numero}} {{adss.ville}} <button (click)="onDeleteAd(adss)">-</button></p>
+      <form [formGroup]="formulaireAdresse">
+<!--        new adresse -> formbuilder click client-->
+      </form>
+      <button (click)="onAddAdresse()">Nouvelle adresse</button>
+    </section>
+    <br>
   </section>
   <br>
   <button (click)="onShowAddSection()">Ajouter un client</button>

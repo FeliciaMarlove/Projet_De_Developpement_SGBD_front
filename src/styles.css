@@ -66,4 +66,5 @@ section {
 
 .inadmin {
   grid-area: ct;
+  padding: 15px;
 }

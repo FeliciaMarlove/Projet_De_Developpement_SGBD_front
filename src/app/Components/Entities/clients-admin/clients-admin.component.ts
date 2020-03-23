@@ -12,11 +12,13 @@ import {Adresse} from '../../../Models/adresse';
 export class ClientsAdminComponent implements OnInit {
   private formulaireMod: FormGroup;
   private formulaireAdd: FormGroup;
+  private formulaireAdresse: FormGroup;
   private success: any;
   private nope: string;
   private showAdd: boolean;
   private clientDto: any;
   private adressesDtos: Adresse[];
+  private selectedAdresse: any;
 
   constructor(
     private fb: FormBuilder,
@@ -25,14 +27,20 @@ export class ClientsAdminComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.adresseService.readAdresses().subscribe(ads => this.adressesDtos = ads);
   }
 
   receiveClient(client: any) {
     this.nope = null;
     this.success = null;
     this.clientDto = client;
+    this.adresseService.readFromClient(client.idClient).subscribe( adresses => this.adressesDtos = adresses);
     this.initForm();
+    this.initAdresseFrom();
+  }
+
+  initAdresseFrom() {
+    this.formulaireAdresse = this.fb.group({
+    });
   }
 
   initForm() {
@@ -77,6 +85,19 @@ export class ClientsAdminComponent implements OnInit {
         if (cltDto != null) { this.success = true; }
       });
     }
+  }
+
+  onSelectAdss(adresseDto: any) {
+    this.selectedAdresse = adresseDto;
+  }
+
+  onDeleteAd(adresse: any) {
+    this.adresseService.deleteAdresse(adresse.idAdresse).subscribe();
+    this.adresseService.readFromClient(this.clientDto.idClient).subscribe( adresses => this.adressesDtos = adresses);
+  }
+
+  onAddAdresse() {
+
   }
 
   private validateTel(formulaire: FormGroup): boolean {

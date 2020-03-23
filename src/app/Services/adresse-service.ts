@@ -33,6 +33,10 @@ export class AdresseService {
     return this.http.post(URI + 'client/' + idClient, adresseDto, httpOptions);
   }
 
+  public readFromClient(idClient: number) {
+    return this.http.get(URI + 'client/' + idClient);
+  }
+
   public updateAdresse(id: number, adresse: Adresse) {
     const adresseDto = {
       rue: adresse.rue,
