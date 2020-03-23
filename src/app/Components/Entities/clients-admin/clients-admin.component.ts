@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ClientService} from '../../../Services/client-service';
 import {AdresseService} from '../../../Services/adresse-service';
 import {Adresse} from '../../../Models/adresse';
+import {FindValueOperator} from 'rxjs/internal/operators/find';
 
 @Component({
   selector: 'app-clients-admin',
@@ -13,12 +14,15 @@ export class ClientsAdminComponent implements OnInit {
   private formulaireMod: FormGroup;
   private formulaireAdd: FormGroup;
   private formulaireAdresse: FormGroup;
-  private success: any;
+  private success: boolean;
+  private successAd: boolean;
   private nope: string;
+  private nopeAdresse: string;
   private showAdd: boolean;
   private clientDto: any;
   private adressesDtos: Adresse[];
   private selectedAdresse: any;
+  private listePays: string[] = ['Belgique', 'France'];
 
   constructor(
     private fb: FormBuilder,
@@ -29,18 +33,17 @@ export class ClientsAdminComponent implements OnInit {
   ngOnInit() {
   }
 
+  initAdresses() {
+    this.adresseService.readFromClient(this.clientDto.idClient).subscribe( adresses => this.adressesDtos = adresses);
+  }
+
   receiveClient(client: any) {
     this.nope = null;
     this.success = null;
     this.clientDto = client;
-    this.adresseService.readFromClient(client.idClient).subscribe( adresses => this.adressesDtos = adresses);
+    this.initAdresses();
     this.initForm();
-    this.initAdresseFrom();
-  }
-
-  initAdresseFrom() {
-    this.formulaireAdresse = this.fb.group({
-    });
+    this.initAdresseForm();
   }
 
   initForm() {
@@ -93,11 +96,29 @@ export class ClientsAdminComponent implements OnInit {
 
   onDeleteAd(adresse: any) {
     this.adresseService.deleteAdresse(adresse.idAdresse).subscribe();
-    this.adresseService.readFromClient(this.clientDto.idClient).subscribe( adresses => this.adressesDtos = adresses);
   }
 
   onAddAdresse() {
+    this.successAd = null;
+    this.nopeAdresse = null;
+    if (this.validateCP(this.formulaireAdresse)) {
+      this.adresseService.createAdresse(this.clientDto.idClient, this.formulaireAdresse.value).subscribe( adresses => {
+        if (adresses != null) {
+          this.successAd = true;
+        }
+      });
+    }
+  }
 
+  initAdresseForm() {
+    this.formulaireAdresse = this.fb.group({
+      rue: ['', Validators.required],
+      numero: ['', Validators.required],
+      complementNumero: [''],
+      codePostal: ['', Validators.required],
+      ville: ['', Validators.required],
+      pays: ['', Validators.required]
+    });
   }
 
   private validateTel(formulaire: FormGroup): boolean {
@@ -108,6 +129,16 @@ export class ClientsAdminComponent implements OnInit {
         this.nope = 'Le numéro de téléphone doit comporter au moins 8 chiffres';
         return false;
       }
+    }
+    return true;
+  }
+
+  private validateCP(formulaire: FormGroup): boolean {
+    const cp = formulaire.controls.codePostal.value;
+    const str = cp.toString();
+    if (str.length < 4 || str.length > 5) {
+      this.nopeAdresse = 'Le code postal doit contenir 4 ou 5 chiffres';
+      return false;
     }
     return true;
   }

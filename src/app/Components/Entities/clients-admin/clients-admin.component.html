@@ -23,10 +23,22 @@
     <p>Gérer les adresses</p>
     <section style="font-size: 13px; border: 1px dimgrey solid; padding: 2px">
       <p *ngFor="let adss of adressesDtos" (click)="onSelectAdss(adss)">{{adss.rue}} {{adss.numero}} {{adss.ville}} <button (click)="onDeleteAd(adss)">-</button></p>
+      <br>
+      <button (click)="initAdresses()">Mettre à jour</button>
+      <br>
       <form [formGroup]="formulaireAdresse">
-<!--        new adresse -> formbuilder click client-->
+        <input formControlName="rue" placeholder="Rue"> <br>
+        <input formControlName="numero" placeholder="Numéro" type="number" min="0">
+        <input formControlName="complementNumero" placeholder="Complément">
+        <input formControlName="codePostal" placeholder="Code postal" type="number" min="0">
+        <input formControlName="ville" placeholder="Ville">
+        <select formControlName="pays">
+          <option *ngFor="let p of listePays" value={{p}}>{{p}}</option>
+        </select>
       </form>
-      <button (click)="onAddAdresse()">Nouvelle adresse</button>
+      <p *ngIf="nopeAdresse">{{nopeAdresse}}</p>
+      <p *ngIf="successAd">Adresse ajoutée</p>
+      <button (click)="onAddAdresse()">Ajouter adresse</button>
     </section>
     <br>
   </section>
