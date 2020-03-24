@@ -23,9 +23,9 @@
     <p>Gérer les adresses</p>
     <section style="font-size: 13px; border: 1px dimgrey solid; padding: 2px">
       <p *ngFor="let adss of adressesDtos" (click)="onSelectAdss(adss)">{{adss.rue}} {{adss.numero}} {{adss.ville}} <button (click)="onDeleteAd(adss)">-</button></p>
-      <br>
-      <button (click)="initAdresses()">Mettre à jour</button>
-      <br>
+      <button (click)="initAdresses()">Mettre à jour la liste</button>
+      <br><br><br>
+
       <form [formGroup]="formulaireAdresse">
         <input formControlName="rue" placeholder="Rue"> <br>
         <input formControlName="numero" placeholder="Numéro" type="number" min="0">

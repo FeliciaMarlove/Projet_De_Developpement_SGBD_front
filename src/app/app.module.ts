@@ -7,7 +7,7 @@ import { WelcomeComponent } from './Components/Structure/welcome/welcome.compone
 import { ArticlesListComponent } from './Components/Entities/articles-list/articles-list.component';
 import { ClientsListComponent } from './Components/Entities/clients-list/clients-list.component';
 import { UtilisateursListComponent } from './Components/Entities/utilisateurs-list/utilisateurs-list.component';
-import { FactureAdminComponent } from './Components/Entities/facture-admin/facture-admin.component';
+import { FactureCreateComponent } from './Components/Entities/facture-create/facture-create.component';
 import { UtilisateursAdminComponent } from './Components/Entities/utilisateurs-admin/utilisateurs-admin.component';
 import { ArticlesAdminComponent } from './Components/Entities/articles-admin/articles-admin.component';
 import { ClientsAdminComponent } from './Components/Entities/clients-admin/clients-admin.component';
@@ -19,7 +19,7 @@ import { FactureReadComponent } from './Components/Entities/facture-read/facture
 import { FactureListComponent } from './Components/Entities/facture-list/facture-list.component';
 import { VueComponent } from './Components/Structure/vue/vue.component';
 import { HttpClientModule} from '@angular/common/http';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     ArticlesListComponent,
     ClientsListComponent,
     UtilisateursListComponent,
-    FactureAdminComponent,
+    FactureCreateComponent,
     UtilisateursAdminComponent,
     ArticlesAdminComponent,
     ClientsAdminComponent,
@@ -44,7 +44,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

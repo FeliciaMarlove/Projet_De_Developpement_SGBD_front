@@ -9,7 +9,7 @@ import {ArticlesAdminComponent} from './Components/Entities/articles-admin/artic
 import {ArticlesListComponent} from './Components/Entities/articles-list/articles-list.component';
 import {ClientsAdminComponent} from './Components/Entities/clients-admin/clients-admin.component';
 import {ClientsListComponent} from './Components/Entities/clients-list/clients-list.component';
-import {FactureAdminComponent} from './Components/Entities/facture-admin/facture-admin.component';
+import {FactureCreateComponent} from './Components/Entities/facture-create/facture-create.component';
 import {FactureListComponent} from './Components/Entities/facture-list/facture-list.component';
 import {FactureReadComponent} from './Components/Entities/facture-read/facture-read.component';
 import {UtilisateursAdminComponent} from './Components/Entities/utilisateurs-admin/utilisateurs-admin.component';
@@ -26,7 +26,7 @@ const routes: Routes = [
         children : [
           { path: 'articles', component: ArticlesAdminComponent},
           { path: 'clients', component: ClientsAdminComponent},
-          { path: 'factures', component: FactureAdminComponent},
+          { path: 'factures', component: FactureCreateComponent},
           { path: 'facture-view', component: FactureReadComponent},
           { path: 'utilisateurs', component: UtilisateursAdminComponent},
         ]

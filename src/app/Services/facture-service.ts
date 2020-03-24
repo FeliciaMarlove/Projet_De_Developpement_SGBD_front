@@ -40,4 +40,21 @@ export class FactureService {
   public deleteFacture(id: number) {
     return this.http.delete(URI + id);
   }
+
+  public addArticle(id: number, idArt: number, qte: number) {
+    const factArtDto = {
+      idFacture: id,
+      idArticle: idArt,
+      quantite: qte
+    }
+    return this.http.put(URI + id + '/add', factArtDto);
+  }
+
+  public articleMinusOne(id: number, idArt: number) {
+    return this.http.get(URI + id + '/minus/' + idArt);
+  }
+
+  public deleteArticle(id: number, idArt: number) {
+    return this.http.get(URI + id + '/del/' + idArt);
+  }
 }

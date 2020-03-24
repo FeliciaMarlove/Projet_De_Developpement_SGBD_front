@@ -1,0 +1,38 @@
+<h4>Encoder une facture</h4>
+<section id="createFacture">
+  <section id="dropdowns">
+    Sélectionner :<br>
+    <p style="font-size: 14px">Client : </p>
+    <select [(ngModel)]="client">
+      <option *ngFor="let clt of clients" [value]="clt.idClient">{{clt.nomClient}} {{clt.prenomClient}}</option>
+    </select>
+    <p style="font-size: 14px">Moyen de paiement : </p>
+    <select [(ngModel)]="paiement">
+      <option *ngFor="let pmt of paiements" [value]="pmt.idPaiement">{{pmt.nomPaiement}}</option>
+    </select>
+    <button (click)="createFacture()" [disabled]="!client || !paiement">Créer la facture</button>
+  </section>
+
+  <section id="actionsArticle" *ngIf="article">
+    <p>Article sélectionné : {{ article?.nomArticle }}</p>
+    <br>
+    Ajouter sur la facture
+    <input [(ngModel)]="quantite" type="number" min="1" max="999" placeholder="Quantité">
+    <button (click)="addFactArt()">✓</button>
+    <br><br>
+    Modifier la quantité
+    <button (click)="plusArticle()">+</button>
+    <button (click)="minusArticle()">-</button>
+    <br><br>
+    Supprimer la ligne
+    <button (click)="deleteArticle()">✖</button>
+    <br><br>
+  </section>
+
+  <app-articles-list id="articlesf" (clickEvent)="receiveArticle($event)"></app-articles-list>
+
+  <section id="factureOnCreate">
+  <h3>Facture :</h3>
+  </section>
+
+</section>

@@ -25,7 +25,7 @@ export class ClientService {
     const clientDto = {
       nomClient: client.nomClient,
       prenomClient: client.prenomClient,
-      telephone: client.telephone,
+      telephoneClient: client.telephoneClient,
       dateNaissanceClient: client.dateNaissanceClient
     };
     return this.http.post(URI, clientDto, httpOptions);
@@ -35,7 +35,7 @@ export class ClientService {
     const clientDto = {
       nomClient: client.nomClient,
       prenomClient: client.prenomClient,
-      telephone: client.telephone,
+      telephoneClient: client.telephoneClient,
       dateNaissanceClient: client.dateNaissanceClient
     };
     return this.http.put(URI + id, clientDto, httpOptions);
