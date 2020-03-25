@@ -13,12 +13,22 @@
     <button (click)="createFacture()" [disabled]="!client || !paiement">Créer la facture</button>
   </section>
 
-  <section id="actionsArticle" *ngIf="article">
+  <section id="actionsArticle" *ngIf="article && idFacture">
     <p>Article sélectionné : {{ article?.nomArticle }}</p>
     <br>
     Ajouter sur la facture
     <input [(ngModel)]="quantite" type="number" min="1" max="999" placeholder="Quantité">
     <button (click)="addFactArt()">✓</button>
+    <br><br>
+  </section>
+
+  <app-articles-list id="articlesf" (clickEvent)="receiveArticle($event)"></app-articles-list>
+
+  <section id="factureOnCreate" *ngIf="idFacture && displayLines.length > 0">
+  <h3>Facture :</h3>
+    <p *ngFor="let a of displayLines, let i = index">{{i+1}} {{a.art}} | {{a.des}} | {{a.qty}} pc. | {{a.montLigne}} € </p>
+    <p>{{tht}} €</p>
+
     <br><br>
     Modifier la quantité
     <button (click)="plusArticle()">+</button>
@@ -27,13 +37,8 @@
     Supprimer la ligne
     <button (click)="deleteArticle()">✖</button>
     <br><br>
-  </section>
-
-  <app-articles-list id="articlesf" (clickEvent)="receiveArticle($event)"></app-articles-list>
-
-  <section id="factureOnCreate">
-  <h3>Facture :</h3>
-
+    CLÔTURER LA FACTURE
+    <button (click)="validate()">Valider</button>
   </section>
 
 </section>

@@ -23,6 +23,7 @@ export class FactureCreateComponent implements OnInit {
   private idFacture: number;
   private facture: any;
   private displayLines: Display[] = [];
+  private tht = 0;
 
   constructor(
     private clientService: ClientService,
@@ -37,12 +38,13 @@ export class FactureCreateComponent implements OnInit {
   }
 
   createFacture() {
+    // DISABLE BOUTON CREER FACTURE + AJOUTER UN ANNULER -> finetuning
     // console.log(this.client); // id client ([value])
     // console.log(this.paiement); // id paiement ([value])
     this.factureService.createFacture(this.client, this.paiement).subscribe( facture => {
       this.facture = facture;
       this.idFacture = this.facture.idFacture;
-      console.log(this.idFacture);
+      // console.log(this.idFacture);
     });
   }
 
@@ -53,32 +55,48 @@ export class FactureCreateComponent implements OnInit {
 
   plusArticle() {
 
+    this.calculateTht(); // dans la subscription !
   }
 
-  minusArticle() { // click / facture ! logique fctionne mais 
+  private calculateTht() {
+    this.tht = 0;
+    this.displayLines.forEach( x => this.tht += x.montLigne);
+  }
+
+  minusArticle() { // click / facture ! logique fctionne mais
     this.factureService.articleMinusOne(this.idFacture, this.article.idArticle).subscribe( () => {
     const index = this.displayLines.findIndex( disp => disp.idArt);
-    if (this.displayLines[index].qty === 1) {this.displayLines.splice(index, 1);} else {
+    if (this.displayLines[index].qty === 1) {this.displayLines.splice(index, 1); } else {
       this.displayLines[index].qty -= 1;
       this.displayLines[index].montLigne -= this.article.prixUnitaire;
     }
-    console.log(this.displayLines);
+    this.calculateTht();
     });
   }
 
   addFactArt() {
-    console.log(this.idFacture);
-    console.log(this.quantite);
     if (this.quantite && this.idFacture) {
       this.factureService.addArticle(this.idFacture, this.article.idArticle, this.quantite).subscribe( response => {
-        this.factureArticle = response; console.log(this.factureArticle);
-        this.displayLines.push(new Display(this.article.idArticle, this.article.nomArticle, this.article.descArticle, this.quantite, this.factureArticle.montantLigne));
-        console.log(this.displayLines);
+        this.factureArticle = response;
+        // console.log(this.factureArticle);
+        const index = this.displayLines.findIndex( disp => disp.idArt);
+        if (index >= 0) {
+          this.displayLines[index].qty = this.factureArticle.quantite;
+          this.displayLines[index].montLigne = this.factureArticle.montantLigne;
+        } else {
+          this.displayLines.push(new Display(this.article.idArticle, this.article.nomArticle, this.article.descArticle, this.factureArticle.quantite, this.factureArticle.montantLigne));
+        }
+        this.calculateTht();
       });
     }
+
   }
 
   deleteArticle() {
+
+  }
+
+  validate() {
 
   }
 
