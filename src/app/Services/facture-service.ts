@@ -21,10 +21,10 @@ export class FactureService {
     return this.http.get<Facture>(URI + id);
   }
 
-  public createFacture(idClient: number, facture: Facture) {
+  public createFacture(idCt: number, idPt: number) {
     const factureDto = {
-      idClient: facture.client.idClient,
-      idPaiement: facture.paiement.idPaiement
+      idClient: idCt,
+      idPaiement: idPt
     };
     return this.http.post(URI, factureDto, httpOptions);
   }
@@ -46,7 +46,7 @@ export class FactureService {
       idFacture: id,
       idArticle: idArt,
       quantite: qte
-    }
+    };
     return this.http.put(URI + id + '/add', factArtDto);
   }
 
@@ -56,5 +56,9 @@ export class FactureService {
 
   public deleteArticle(id: number, idArt: number) {
     return this.http.get(URI + id + '/del/' + idArt);
+  }
+
+  public readArticle(id: number) {
+    return this.http.get(URI + id + '/articles');
   }
 }

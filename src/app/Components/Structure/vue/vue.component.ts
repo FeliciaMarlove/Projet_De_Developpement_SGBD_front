@@ -15,7 +15,9 @@ export class VueComponent implements OnInit {
   constructor(private userService: UtilisateurService) { }
 
   ngOnInit() {
+    // @ts-ignore
     this.userName = JSON.parse(sessionStorage.getItem('user')).login;
+    // @ts-ignore
     this.userService.readUtilisateurs().subscribe( utilisateurs =>  utilisateurs.forEach(
       utilisateur => {if (utilisateur.login.localeCompare(this.userName) === 0) { this.connectedUser = utilisateur; }}
     ));

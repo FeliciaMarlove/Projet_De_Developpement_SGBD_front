@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../../../Services/login-service';
 import {Router} from '@angular/router';
-import {Utilisateur} from '../../../Models/utilisateur';
 
 @Component({
   selector: 'app-welcome',
@@ -28,6 +27,7 @@ export class WelcomeComponent implements OnInit {
        // console.log(connectMsgr);
        this.message = connectMsgr.message;
        if (connectMsgr.success) {
+         // @ts-ignore
          sessionStorage.setItem('user', JSON.stringify({login: this.loginForm.controls.login.value}));
          this.router.navigateByUrl('dashboard/vue');
        }
