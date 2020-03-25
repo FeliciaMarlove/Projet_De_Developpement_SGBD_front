@@ -20,7 +20,7 @@ export class ClientsAdminComponent implements OnInit {
   private nopeAdresse: string;
   private showAdd: boolean;
   private clientDto: any;
-  private adressesDtos: Adresse[];
+  private adressesDtos: any;
   private selectedAdresse: any;
   private listePays: string[] = ['Belgique', 'France'];
 

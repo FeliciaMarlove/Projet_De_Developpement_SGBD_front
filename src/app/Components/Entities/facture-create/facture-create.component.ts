@@ -5,6 +5,7 @@ import {PaiementService} from '../../../Services/paiement-service';
 import {FactureService} from '../../../Services/facture-service';
 import {FactureArticles} from '../../../Models/facture-articles';
 import {Display} from '../../../Models/display';
+import {Facture} from '../../../Models/facture';
 
 @Component({
   selector: 'app-facture-create',
@@ -18,8 +19,9 @@ export class FactureCreateComponent implements OnInit {
   private paiement: any;
   private article: any;
   private quantite: number;
-  private factureArticle: FactureArticles;
+  private factureArticle: any;
   private idFacture: number;
+  private facture: any;
   private displayLines: Display[] = [];
 
   constructor(
@@ -38,8 +40,9 @@ export class FactureCreateComponent implements OnInit {
     // console.log(this.client); // id client ([value])
     // console.log(this.paiement); // id paiement ([value])
     this.factureService.createFacture(this.client, this.paiement).subscribe( facture => {
-      this.idFacture = facture.idFacture;
-      // console.log(this.idFacture);
+      this.facture = facture;
+      this.idFacture = this.facture.idFacture;
+      console.log(this.idFacture);
     });
   }
 
@@ -52,9 +55,14 @@ export class FactureCreateComponent implements OnInit {
 
   }
 
-  minusArticle() {
+  minusArticle() { // click / facture ! logique fctionne mais 
     this.factureService.articleMinusOne(this.idFacture, this.article.idArticle).subscribe( () => {
-    
+    const index = this.displayLines.findIndex( disp => disp.idArt);
+    if (this.displayLines[index].qty === 1) {this.displayLines.splice(index, 1);} else {
+      this.displayLines[index].qty -= 1;
+      this.displayLines[index].montLigne -= this.article.prixUnitaire;
+    }
+    console.log(this.displayLines);
     });
   }
 
@@ -64,7 +72,7 @@ export class FactureCreateComponent implements OnInit {
     if (this.quantite && this.idFacture) {
       this.factureService.addArticle(this.idFacture, this.article.idArticle, this.quantite).subscribe( response => {
         this.factureArticle = response; console.log(this.factureArticle);
-        this.displayLines.push(new Display(this.article.nomArticle, this.article.descArticle, this.quantite, this.factureArticle.montantLigne));
+        this.displayLines.push(new Display(this.article.idArticle, this.article.nomArticle, this.article.descArticle, this.quantite, this.factureArticle.montantLigne));
         console.log(this.displayLines);
       });
     }
