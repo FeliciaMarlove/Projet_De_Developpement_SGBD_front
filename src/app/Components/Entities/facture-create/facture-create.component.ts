@@ -19,8 +19,8 @@ export class FactureCreateComponent implements OnInit {
   private article: any;
   private quantite: number;
   private factArticles: FactureArticles[];
+  private factureArticle: FactureArticles;
   private idFacture: number;
-  private success: boolean;
   private displayLines: Display[] = [];
 
   constructor(
@@ -45,6 +45,7 @@ export class FactureCreateComponent implements OnInit {
   }
 
   receiveArticle(article: any) {
+    this.quantite = null;
     this.article = article;
   }
 
@@ -61,13 +62,12 @@ export class FactureCreateComponent implements OnInit {
     console.log(this.quantite);
     if (this.quantite && this.idFacture) {
       this.factureService.addArticle(this.idFacture, this.article.idArticle, this.quantite).subscribe( response => {
-        this.success = response; console.log(this.success);
+        this.factureArticle = response; console.log(this.factureArticle);
         // @ts-ignore
-        this.displayLines.push(new Display(this.article.nomArticle, this.article.descArticle, this.quantite));
+        this.displayLines.push(new Display(this.article.nomArticle, this.article.descArticle, this.quantite, this.factureArticle.montantLigne));
         console.log(this.displayLines);
       });
     }
-    this.quantite = null;
   }
 
   deleteArticle() {
