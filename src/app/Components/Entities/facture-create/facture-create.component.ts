@@ -93,7 +93,11 @@ export class FactureCreateComponent implements OnInit {
   }
 
   deleteArticle() {
-
+    this.factureService.deleteArticle(this.idFacture, this.article.idArticle).subscribe( () => {
+      const index = this.displayLines.findIndex( d => d.idArt = this.article.idArticle);
+      this.displayLines.splice(index, 1);
+      this.calculateTht();
+    });
   }
 
   validate() {
