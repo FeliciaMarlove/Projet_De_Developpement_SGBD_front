@@ -54,8 +54,8 @@ export class FactureCreateComponent implements OnInit {
   }
 
   plusArticle() {
-
-    this.calculateTht(); // dans la subscription !
+    this.quantite = 1;
+    this.addFactArt();
   }
 
   private calculateTht() {
