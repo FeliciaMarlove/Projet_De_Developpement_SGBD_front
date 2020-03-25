@@ -18,7 +18,6 @@ export class FactureCreateComponent implements OnInit {
   private paiement: any;
   private article: any;
   private quantite: number;
-  private factArticles: FactureArticles[];
   private factureArticle: FactureArticles;
   private idFacture: number;
   private displayLines: Display[] = [];
@@ -40,7 +39,7 @@ export class FactureCreateComponent implements OnInit {
     // console.log(this.paiement); // id paiement ([value])
     this.factureService.createFacture(this.client, this.paiement).subscribe( facture => {
       this.idFacture = facture.idFacture;
-      console.log(this.idFacture);
+      // console.log(this.idFacture);
     });
   }
 
@@ -54,7 +53,9 @@ export class FactureCreateComponent implements OnInit {
   }
 
   minusArticle() {
-
+    this.factureService.articleMinusOne(this.idFacture, this.article.idArticle).subscribe( () => {
+    
+    });
   }
 
   addFactArt() {
@@ -63,7 +64,6 @@ export class FactureCreateComponent implements OnInit {
     if (this.quantite && this.idFacture) {
       this.factureService.addArticle(this.idFacture, this.article.idArticle, this.quantite).subscribe( response => {
         this.factureArticle = response; console.log(this.factureArticle);
-        // @ts-ignore
         this.displayLines.push(new Display(this.article.nomArticle, this.article.descArticle, this.quantite, this.factureArticle.montantLigne));
         console.log(this.displayLines);
       });

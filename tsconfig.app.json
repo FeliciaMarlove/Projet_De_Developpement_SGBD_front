@@ -2,12 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": [],
-    "lib": [
-      "webworker",
-      "es2015.symbol.wellknown",
-      "dom"
-    ]
+    "types": []
   },
   "files": [
     "src/main.ts",
