@@ -1,4 +1,4 @@
 <h4>Articles</h4>
-<div *ngFor="let article of articles" (click)="onClick(article)">{{ article.nomArticle }} - {{article.prixUnitaire}} €</div>
+<div *ngFor="let article of articles" (click)="onClick(article)" [style.color]="article.stock > 0 ? '' : 'grey'">{{ article.nomArticle }} - {{article.prixUnitaire}} €</div>
 <br>
 <button *ngIf="router.url == '/dashboard/vue/articles'" (click)="onRefresh()">Mettre à jour</button>

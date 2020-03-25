@@ -13,12 +13,13 @@
     <button (click)="createFacture()" [disabled]="!client || !paiement">Créer la facture</button>
   </section>
 
-  <section id="actionsArticle" *ngIf="article && idFacture">
+  <section id="actionsArticle" *ngIf="article && idFacture" [style.color]="article.stock > 0 ? '' : 'grey'">
     <p>Article sélectionné : {{ article?.nomArticle }}</p>
     <br>
     Ajouter sur la facture
-    <input [(ngModel)]="quantite" type="number" min="1" max="999" placeholder="Quantité">
-    <button (click)="addFactArt()">✓</button>
+    <p *ngIf="article.stock === 0" style="color: red">Article non disponible</p>
+    <input [(ngModel)]="quantite" type="number" min="1" max="999" placeholder="Quantité" [disabled]="article.stock === 0">
+    <button (click)="addFactArt()" [disabled]="article.stock === 0">✓</button>
     <br><br>
   </section>
 
@@ -30,6 +31,8 @@
     <p>{{tht}} €</p>
 
     <br><br>
+    <p>Article sélectionné : {{ article?.nomArticle }}</p>
+    <br>
     Modifier la quantité
     <button (click)="plusArticle()">+</button>
     <button (click)="minusArticle()">-</button>

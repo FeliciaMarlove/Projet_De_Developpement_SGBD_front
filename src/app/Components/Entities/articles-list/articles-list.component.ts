@@ -19,8 +19,8 @@ export class ArticlesListComponent implements OnInit {
   }
 
   onClick(article: Article) {
-    this.clickEvent.emit(article);
-    this.initArticles();
+      this.clickEvent.emit(article);
+      this.initArticles();
   }
 
   initArticles() {

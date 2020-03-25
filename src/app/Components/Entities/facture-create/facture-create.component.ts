@@ -51,6 +51,7 @@ export class FactureCreateComponent implements OnInit {
   receiveArticle(article: any) {
     this.quantite = null;
     this.article = article;
+    console.log(this.article)
   }
 
   plusArticle() {
