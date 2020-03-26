@@ -7,9 +7,9 @@
   <p>Date {{factureDto.dateHeure | date: 'short'}}</p>
   <p>Articles</p>
   <div *ngFor="let faArt of displayArticles, let i = index">{{i+1}} {{faArt.art}} | {{faArt.des}} {{faArt.qty}} pc. | {{faArt.montLigne}} €</div>
-  <p>Total HT {{factureDto.total}} €</p>
-  <p>TVA {{factureDto.totalTva}} €</p>
-  <p>Total TTC {{factureDto.totalTTC}} €</p>
+  <p>Total HT {{factureDto.total | number: '1.2-2'}} €</p>
+  <p>TVA {{factureDto.totalTva | number: '1.2-2'}} €</p>
+  <p>Total TTC {{factureDto.totalTTC | number: '1.2-2'}} €</p>
 </section>
 
 

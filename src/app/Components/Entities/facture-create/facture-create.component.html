@@ -27,7 +27,7 @@
 
   <section id="factureOnCreate" *ngIf="idFacture && displayLines.length > 0">
   <h3>Facture :</h3>
-    <p *ngFor="let a of displayLines, let i = index">{{i+1}} {{a.art}} | {{a.des}} | {{a.qty}} pc. | {{a.montLigne}} € </p>
+    <p *ngFor="let a of displayLines, let i = index">{{i+1}} {{a.art}} | {{a.des}} | {{a.qty}} pc. | {{a.montLigne | number: '1.2-2'}} € </p>
     <p>{{tht}} €</p>
 
     <br><br>
