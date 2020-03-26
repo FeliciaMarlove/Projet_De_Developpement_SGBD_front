@@ -51,7 +51,7 @@ export class FactureCreateComponent implements OnInit {
   receiveArticle(article: any) {
     this.quantite = null;
     this.article = article;
-    console.log(this.article)
+    console.log(this.article);
   }
 
   plusArticle() {
@@ -80,15 +80,17 @@ export class FactureCreateComponent implements OnInit {
       this.factureService.addArticle(this.idFacture, this.article.idArticle, this.quantite).subscribe( response => {
         this.factureArticle = response;
         // console.log(this.factureArticle);
-        const index = this.displayLines.findIndex( disp => disp.idArt);
+        const index = this.displayLines.findIndex( disp => disp.idArt === this.article.idArticle);
         if (index >= 0) {
           this.displayLines[index].qty = this.factureArticle.quantite;
           this.displayLines[index].montLigne = this.factureArticle.montantLigne;
         } else {
+          // tslint:disable-next-line:max-line-length
           this.displayLines.push(new Display(this.article.idArticle, this.article.nomArticle, this.article.descArticle, this.factureArticle.quantite, this.factureArticle.montantLigne));
         }
         this.calculateTht();
       });
+
     }
 
   }
@@ -102,7 +104,7 @@ export class FactureCreateComponent implements OnInit {
   }
 
   validate() {
-
+   this.factureService.validateFacture(this.facture.idFacture).subscribe();
   }
 
 }

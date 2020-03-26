@@ -5,7 +5,7 @@ export class Facture {
     idFacture: number;
     refFacture: string;
     dateHeure: Date;
-    isActiveFacture: boolean;
+    activeFacture: boolean;
     validee: boolean;
     total: number;
     totalTva: number;

@@ -1,1 +1,6 @@
-<p>facture-list works!</p>
+<h4>Consulter une facture</h4>
+<div *ngFor="let fact of factures" (click)="onClick(fact)">
+<!--  {{fact.client.nomClient}} {{fact.client.prenomClient}} - -->
+  {{fact.dateHeure |date: 'dd-MMM-yyyy'}} {{fact.refFacture}}<hr>
+</div>
+

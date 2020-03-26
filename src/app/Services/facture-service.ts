@@ -29,12 +29,8 @@ export class FactureService {
     return this.http.post(URI, factureDto, httpOptions);
   }
 
-  public updateFacture(id: number, facture: Facture) {
-    const factureDto = {
-      idClient: facture.client.idClient,
-      idPaiement: facture.paiement.idPaiement
-    };
-    return this.http.put(URI + id, factureDto, httpOptions);
+  public validateFacture(id: number) {
+    return this.http.get(URI + id + '/validate');
   }
 
   public deleteFacture(id: number) {
@@ -58,7 +54,7 @@ export class FactureService {
     return this.http.get(URI + id + '/del/' + idArt);
   }
 
-  public readArticle(id: number) {
+  public readArticles(id: number) {
     return this.http.get(URI + id + '/articles');
   }
 }
