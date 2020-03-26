@@ -1,15 +1,16 @@
-<h4>Détails de la facture</h4>
+<app-facture-list (clickEvent)="receiveFacture($event)"></app-facture-list>
+<section class="inadmin" *ngIf="factureDto">
+  <h4>Détails de la facture</h4> <br>
+  <p>Client : {{client?.nomClient}} {{client?.prenomClient}}</p>
+  <p>Paiement :{{paiement?.nomPaiement}}</p>
+  <p>Ref. {{factureDto.refFacture}}</p>
+  <p>Date {{factureDto.dateHeure | date: 'short'}}</p>
+  <p>Articles</p>
+  <div *ngFor="let faArt of displayArticles, let i = index">{{i+1}} {{faArt.art}} | {{faArt.des}} {{faArt.qty}} pc. | {{faArt.montLigne}} €</div>
+  <p>Total HT {{factureDto.total}} €</p>
+  <p>TVA {{factureDto.totalTva}} €</p>
+  <p>Total TTC {{factureDto.totalTTC}} €</p>
+</section>
 
-<app-facture-list></app-facture-list>
-
-<!--<p>{{client.nomClient}} {{client.prenomClient}}</p>-->
-<!--<p>{{paiement.nomPaiement}}</p>-->
-<!--<p>Ref. {{facture.refFacture}}</p>-->
-<!--<p>Date {{facture.dateHeure | date: 'short'}}</p>-->
-<!--<p>Articles</p>-->
-<!--<div *ngFor="let faArt of displayArticles, let i = index">{{i+1}} {{faArt.art}} | {{faArt.des}} {{faArt.qty}} pc. | {{faArt.montLigne}} €</div>-->
-<!--<p>Total HT {{facture.total}} €</p>-->
-<!--<p>TVA {{facture.totalTva}}</p>-->
-<!--<p>Total TTC {{facture.totalTTC}}</p>-->
 
 
