@@ -2,7 +2,7 @@
 <section class="inadmin">
   <h4>Modifier, ajouter ou supprimer des articles</h4>
   <p>Sélectionnez un article pour modifier</p>
-  <section class="modifier" *ngIf="article">
+  <section class="modifier" *ngIf="articleDto && formulaireMod">
     <form [formGroup]="formulaireMod" (ngSubmit)="onModify()">
       <label of="nomArticle">Désignation </label>
       <input formControlName="nomArticle"> <br>

@@ -11,7 +11,7 @@ import {Tva} from '../../../Models/tva';
   styleUrls: ['./articles-admin.component.css']
 })
 export class ArticlesAdminComponent implements OnInit {
-  private article: Article;
+  private articleDto: any;
   private formulaireMod: FormGroup;
   private formulaireAdd: FormGroup;
   private success: any;
@@ -32,18 +32,18 @@ export class ArticlesAdminComponent implements OnInit {
   receiveArticle(article: Article) {
     this.nope = null;
     this.success = null;
-    this.article = article;
+    this.articleDto = article;
     this.initForm();
   }
 
   initForm() {
     this.formulaireMod = this.fb.group({
-      nomArticle: [this.article.nomArticle, [Validators.required]],
-      descArticle: [this.article.descArticle, [Validators.required]],
-      stock: [this.article.stock, [Validators.required]],
-      prixUnitaire: [this.article.prixUnitaire, [Validators.required]],
-      codeEAN: [this.article.codeEAN, [Validators.required]],
-      idTva: [this.article.tva.idTva, [Validators.required]]
+      nomArticle: [this.articleDto.nomArticle, [Validators.required]],
+      descArticle: [this.articleDto.descArticle, [Validators.required]],
+      stock: [this.articleDto.stock, [Validators.required]],
+      prixUnitaire: [this.articleDto.prixUnitaire, [Validators.required]],
+      codeEAN: [this.articleDto.codeEAN, [Validators.required]],
+      idTva: [this.articleDto.idTva, [Validators.required]]
     });
   }
 
@@ -71,7 +71,7 @@ export class ArticlesAdminComponent implements OnInit {
   }
 
   onDelete() {
-    this.articleService.deleteArticle(this.article.idArticle).subscribe();
+    this.articleService.deleteArticle(this.articleDto.idArticle).subscribe();
   }
 
   onModify() {
@@ -80,7 +80,7 @@ export class ArticlesAdminComponent implements OnInit {
     // console.log(this.formulaireMod.value);
     if (this.validateEAN(this.formulaireMod) && this.validateStock(this.formulaireMod)) {
       // console.log(this.formulaireMod.value)
-      this.articleService.updateArticle(this.formulaireMod.controls.idArticle.value, this.formulaireMod.value)
+      this.articleService.updateArticle(this.articleDto.idArticle, this.formulaireMod.value)
         .subscribe( reussite => {
           this.success = reussite;
          // console.log(this.success ? 'Updated' : 'Failure in update');
