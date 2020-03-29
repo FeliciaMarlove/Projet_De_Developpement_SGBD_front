@@ -12,6 +12,7 @@
     </select>
     <button (click)="createFacture()" [disabled]="!client || !paiement">Créer la facture</button>
   </section>
+  <p style="color: green" *ngIf="factureCreated">{{factureCreated}}</p>
 
   <section id="actionsArticle" *ngIf="article && idFacture" [style.color]="article.stock > 0 ? '' : 'grey'">
     <p>Article sélectionné : {{ article?.nomArticle }}</p>

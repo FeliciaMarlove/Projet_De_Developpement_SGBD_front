@@ -24,6 +24,7 @@ export class FactureCreateComponent implements OnInit {
   private facture: any;
   private displayLines: Display[] = [];
   private tht = 0;
+  private factureCreated: string;
 
   constructor(
     private clientService: ClientService,
@@ -44,6 +45,7 @@ export class FactureCreateComponent implements OnInit {
     this.factureService.createFacture(this.client, this.paiement).subscribe( facture => {
       this.facture = facture;
       this.idFacture = this.facture.idFacture;
+      if (this.facture != null) { this.factureCreated = 'Facture en cours d\'édition'; }
       // console.log(this.idFacture);
     });
   }
