@@ -39,6 +39,7 @@ export class FactureReadComponent implements OnInit {
     this.clientService.readClient(this.factureDto.idClient).subscribe( client => this.client = client);
     this.paiementService.readPaiement(this.factureDto.idPaiement).subscribe( paiement => this.paiement = paiement);
     this.factureService.readArticles(this.factureDto.idFacture).subscribe( factArt => {
+      console.log(factArt)
       // @ts-ignore
       this.factureArticles = factArt;
       this.factureArticles.forEach( fa => {

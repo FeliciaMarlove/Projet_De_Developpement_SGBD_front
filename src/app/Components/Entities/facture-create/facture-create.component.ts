@@ -25,6 +25,9 @@ export class FactureCreateComponent implements OnInit {
   private displayLines: Display[] = [];
   private tht = 0;
   private factureCreated: string;
+  private remainingQty: number;
+  private warningQty: string;
+  private valFact: string;
 
   constructor(
     private clientService: ClientService,
@@ -39,7 +42,6 @@ export class FactureCreateComponent implements OnInit {
   }
 
   createFacture() {
-    // DISABLE BOUTON CREER FACTURE + AJOUTER UN ANNULER -> finetuning
     // console.log(this.client); // id client ([value])
     // console.log(this.paiement); // id paiement ([value])
     this.factureService.createFacture(this.client, this.paiement).subscribe( facture => {
@@ -53,7 +55,7 @@ export class FactureCreateComponent implements OnInit {
   receiveArticle(article: any) {
     this.quantite = null;
     this.article = article;
-    console.log(this.article);
+    // console.log(this.article);
   }
 
   plusArticle() {
@@ -66,9 +68,9 @@ export class FactureCreateComponent implements OnInit {
     this.displayLines.forEach( x => this.tht += x.montLigne);
   }
 
-  minusArticle() { // click / facture ! logique fctionne mais
+  minusArticle() {
     this.factureService.articleMinusOne(this.idFacture, this.article.idArticle).subscribe( () => {
-    const index = this.displayLines.findIndex( disp => disp.idArt);
+    const index = this.displayLines.findIndex( disp => disp.idArt === this.article.idArticle);
     if (this.displayLines[index].qty === 1) {this.displayLines.splice(index, 1); } else {
       this.displayLines[index].qty -= 1;
       this.displayLines[index].montLigne -= this.article.prixUnitaire;
@@ -78,19 +80,33 @@ export class FactureCreateComponent implements OnInit {
   }
 
   addFactArt() {
+    this.warningQty = '';
     if (this.quantite && this.idFacture) {
       this.factureService.addArticle(this.idFacture, this.article.idArticle, this.quantite).subscribe( response => {
         this.factureArticle = response;
-        // console.log(this.factureArticle);
-        const index = this.displayLines.findIndex( disp => disp.idArt === this.article.idArticle);
-        if (index >= 0) {
-          this.displayLines[index].qty = this.factureArticle.quantite;
-          this.displayLines[index].montLigne = this.factureArticle.montantLigne;
+        console.log(this.factureArticle);
+        if (this.factureArticle == null) {
+          this.articleService.readArticle(this.article.idArticle).subscribe( art => {
+            this.remainingQty = art.stock;
+            if (this.remainingQty < this.quantite) {
+              this.warningQty = 'Impossible d\'ajouter l\'article, il ne reste plus que ' + this.remainingQty + ' pièces en stock.';
+            }
+          });
         } else {
-          // tslint:disable-next-line:max-line-length
-          this.displayLines.push(new Display(this.article.idArticle, this.article.nomArticle, this.article.descArticle, this.factureArticle.quantite, this.factureArticle.montantLigne));
+          const index = this.displayLines.findIndex( disp => disp.idArt === this.article.idArticle);
+          if (index >= 0) {
+            this.displayLines[index].qty = this.factureArticle.quantite;
+            this.displayLines[index].montLigne = this.factureArticle.montantLigne;
+          } else {
+            this.displayLines.push(new Display(
+              this.article.idArticle,
+              this.article.nomArticle,
+              this.article.descArticle,
+              this.factureArticle.quantite,
+              this.factureArticle.montantLigne));
+          }
+          this.calculateTht();
         }
-        this.calculateTht();
       });
 
     }
@@ -106,7 +122,9 @@ export class FactureCreateComponent implements OnInit {
   }
 
   validate() {
-   this.factureService.validateFacture(this.facture.idFacture).subscribe();
+    this.valFact = null;
+    this.factureService.validateFacture(this.facture.idFacture).subscribe( factDto => {
+     if (factDto != null) { this.valFact = 'Facture clôturée'; }
+   });
   }
-
 }
