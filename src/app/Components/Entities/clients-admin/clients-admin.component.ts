@@ -69,7 +69,7 @@ export class ClientsAdminComponent implements OnInit {
     this.nope = null;
     this.success = null;
     if (this.validateTel(this.formulaireAdd)) {
-      this.clientService.createClient(this.clientDto.idClient, this.formulaireAdd.value).subscribe( newClient => {
+      this.clientService.createClient(this.formulaireAdd.value).subscribe( newClient => {
         if (newClient != null) {
           this.success = true;
           console.log('client créé', newClient);

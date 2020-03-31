@@ -21,7 +21,7 @@ export class ClientService {
     return this.http.get<Client>(URI + id);
   }
 
-  public createClient(idClient: number, client: Client) {
+  public createClient(client: Client) {
     const clientDto = {
       nomClient: client.nomClient,
       prenomClient: client.prenomClient,
