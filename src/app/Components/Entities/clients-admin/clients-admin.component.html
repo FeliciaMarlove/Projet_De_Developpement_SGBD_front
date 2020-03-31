@@ -15,7 +15,7 @@
       <br>
       <button type="submit" [disabled]="formulaireMod.pristine || formulaireMod.invalid">Modifier</button>
     </form>
-    <p *ngIf="nope && !success">{{ nope }}</p>
+    <p style="color: red;" *ngIf="nope && !success">{{ nope }}</p>
     <p *ngIf="success && !nope">Mise à jour effectuée !</p>
     <br>
     <button (click)="onDelete()">Supprimer le client</button>
@@ -38,7 +38,7 @@
       </form>
       <p *ngIf="nopeAdresse">{{nopeAdresse}}</p>
       <p *ngIf="successAd">Adresse ajoutée</p>
-      <button (click)="onAddAdresse()">Ajouter adresse</button>
+      <button (click)="onAddAdresse()" [disabled]="formulaireAdresse.pristine || formulaireAdresse.invalid">Ajouter adresse</button>
     </section>
     <br>
   </section>
@@ -57,7 +57,7 @@
       <br>
       <button type="submit" [disabled]="formulaireAdd.pristine || formulaireAdd.invalid">Ajouter</button>
     </form>
-    <p *ngIf="nope && !success">{{ nope }}</p>
+    <p style="color: red;" *ngIf="nope && !success">{{ nope }}</p>
     <p *ngIf="success && !nope">Client ajouté !</p>
   </section>
 </section>

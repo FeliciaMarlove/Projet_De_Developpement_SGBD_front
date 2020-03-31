@@ -68,6 +68,7 @@ export class UtilisateursAdminComponent implements OnInit {
     this.success = null;
     this.utilisateurService.createUtilisateur(this.formulaireAdd.value)
       .subscribe(newUser => {
+        console.log(newUser)
         if (newUser != null) {
           this.success = true;
           console.log('nouvel utilisateur créé', newUser);
@@ -87,6 +88,7 @@ export class UtilisateursAdminComponent implements OnInit {
     this.success = null;
     this.utilisateurService.updateUtilisateur(this.formulaireMod.controls.login.value, this.formulaireMod.value)
       .subscribe(modification => { if (modification != null) {
+        console.log(modification)
         this.success = true;
       } else {
         this.nope = 'L\'utilisateur existe déjà';

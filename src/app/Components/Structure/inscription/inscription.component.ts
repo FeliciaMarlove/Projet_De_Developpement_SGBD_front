@@ -16,6 +16,8 @@ export class InscriptionComponent implements OnInit {
   private departements: Departement[];
   private success: boolean;
   private message: string;
+  private login4min: string;
+  private mdp4min: string;
 
   constructor(
     private router: Router,
@@ -51,6 +53,11 @@ export class InscriptionComponent implements OnInit {
 
   accessToDash() {
     this.router.navigateByUrl('dashboard/vue');
+  }
+
+  warnUser() {
+    if (this.signupForm.controls.login.value.toString().length < 4) { this.login4min = 'Le login doit comporter au moins 4 caractères'; } else { this.login4min = ''; }
+    if (this.signupForm.controls.motDePasse.value.toString().length < 4) { this.mdp4min = 'Le mot de passe doit comporter au moins 4 caractères'; } else { this.mdp4min = ''; }
   }
 
 }

@@ -5,9 +5,9 @@
   <br>
   <input formControlName="prenomUtilisateur" placeholder="Prénom">
   <br>
-  <input formControlName="login" placeholder="Identifiant">
+  <input formControlName="login" placeholder="Identifiant (min. 4 caractères)" minlength="4" (input)="warnUser()">
   <br>
-  <input formControlName="motDePasse" placeholder="motDePasse" type="password">
+  <input formControlName="motDePasse" placeholder="Mot de passe (min 4 caractères)" minlength="4" (input)="warnUser()" type="password">
   <br>
   <input formControlName="poste" placeholder="Poste/Titre">
   <br>
@@ -15,6 +15,8 @@
     <option *ngFor="let dep of departements" value = {{dep.nomDepartement}}>{{ dep.nomDepartement }}</option>
   </select>
   <button type="submit" [disabled]=" signupForm.pristine || signupForm.invalid">S'enregistrer</button>
+  <p style="color: red" *ngIf="login4min">{{login4min}}</p>
+  <p style="color: red" *ngIf="mdp4min">{{mdp4min}}</p>
 </form>
 
 <p *ngIf="message">{{message}}</p>

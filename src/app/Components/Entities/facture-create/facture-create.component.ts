@@ -27,6 +27,7 @@ export class FactureCreateComponent implements OnInit {
   private factureCreated: string;
   private remainingQty: number;
   private warningQty: string;
+  private warn: string;
   private valFact: string;
 
   constructor(
@@ -42,13 +43,10 @@ export class FactureCreateComponent implements OnInit {
   }
 
   createFacture() {
-    // console.log(this.client); // id client ([value])
-    // console.log(this.paiement); // id paiement ([value])
     this.factureService.createFacture(this.client, this.paiement).subscribe( facture => {
       this.facture = facture;
       this.idFacture = this.facture.idFacture;
       if (this.facture != null) { this.factureCreated = 'Facture en cours d\'édition'; }
-      // console.log(this.idFacture);
     });
   }
 
@@ -69,17 +67,36 @@ export class FactureCreateComponent implements OnInit {
   }
 
   minusArticle() {
-    this.factureService.articleMinusOne(this.idFacture, this.article.idArticle).subscribe( () => {
+    this.warn = '';
     const index = this.displayLines.findIndex( disp => disp.idArt === this.article.idArticle);
-    if (this.displayLines[index].qty === 1) {this.displayLines.splice(index, 1); } else {
-      this.displayLines[index].qty -= 1;
-      this.displayLines[index].montLigne -= this.article.prixUnitaire;
-    }
-    this.calculateTht();
+    if (index !== -1) {
+    this.factureService.articleMinusOne(this.idFacture, this.article.idArticle).subscribe( () => {
+      if (this.displayLines[index].qty === 1) {this.displayLines.splice(index, 1); } else {
+        this.displayLines[index].qty -= 1;
+        this.displayLines[index].montLigne -= this.article.prixUnitaire;
+      }
+      this.calculateTht();
     });
+    } else {
+      this.warn = 'Veuillez sélectionner un article qui se trouve sur la facture';
+    }
+  }
+
+  deleteArticle() {
+    this.warn = '';
+    const index = this.displayLines.findIndex( d => d.idArt === this.article.idArticle);
+    if (index !== -1) {
+    this.factureService.deleteArticle(this.idFacture, this.article.idArticle).subscribe( () => {
+        this.displayLines.splice(index, 1);
+        this.calculateTht();
+    });
+    } else {
+      this.warn = 'Veuillez sélectionner un article qui se trouve sur la facture';
+    }
   }
 
   addFactArt() {
+    this.warn = '';
     this.warningQty = '';
     if (this.quantite && this.idFacture) {
       this.factureService.addArticle(this.idFacture, this.article.idArticle, this.quantite).subscribe( response => {
@@ -108,23 +125,14 @@ export class FactureCreateComponent implements OnInit {
           this.calculateTht();
         }
       });
-
     }
-
-  }
-
-  deleteArticle() {
-    this.factureService.deleteArticle(this.idFacture, this.article.idArticle).subscribe( () => {
-      const index = this.displayLines.findIndex( d => d.idArt = this.article.idArticle);
-      this.displayLines.splice(index, 1);
-      this.calculateTht();
-    });
   }
 
   validate() {
     this.valFact = null;
     this.factureService.validateFacture(this.facture.idFacture).subscribe( factDto => {
-     if (factDto != null) { this.valFact = 'Facture clôturée'; }
+      console.log(factDto)
+      if (factDto != null) { this.valFact = 'Facture clôturée'; }
    });
   }
 }

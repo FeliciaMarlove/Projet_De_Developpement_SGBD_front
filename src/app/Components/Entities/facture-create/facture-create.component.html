@@ -33,8 +33,9 @@
     <p>Total HT : {{tht | number: '1.2-2'}} €</p>
 
     <br><br>
-    <p>Article sélectionné : {{ article?.nomArticle }}</p>
+    <p>Article sélectionné : {{ article?.nomArticle.toUpperCase() }}</p>
     <br>
+    <p *ngIf="warn" style="color: red">{{warn}}</p>
     Modifier la quantité
     <button (click)="plusArticle()">+</button>
     <button (click)="minusArticle()">-</button>

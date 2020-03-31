@@ -9,7 +9,7 @@
       <label of="nomUtilisateur">Nom</label>
       <input formControlName="nomUtilisateur"> <br>
       <label of="login">Identifiant</label>
-      <input formControlName="login"> <br>
+      <input formControlName="login" disabled="true"> <br>
       <label of="poste">Poste</label>
       <input formControlName="poste"> <br>
       <label of="nomDepartement">Département</label>
@@ -42,5 +42,6 @@
     <br>
     <button type="submit">Créer</button> <br>
     <p *ngIf="confirmation"> {{confirmation}}</p>
+    <p *ngIf="nope" style="color: red">{{nope}}</p>
   </form>
 </section>

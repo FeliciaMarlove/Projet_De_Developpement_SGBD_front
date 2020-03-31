@@ -50,8 +50,8 @@ export class ClientsAdminComponent implements OnInit {
     this.formulaireMod = this.fb.group({
       nomClient: [this.clientDto.nomClient, Validators.required],
       prenomClient: [this.clientDto.prenomClient, Validators.required],
-      telephoneClient: [this.clientDto.telephoneClient],
-      dateNaissanceClient: [this.clientDto.dateNaissanceClient]
+      telephoneClient: [this.clientDto.telephoneClient, Validators.required],
+      dateNaissanceClient: [this.clientDto.dateNaissanceClient, Validators.required]
     });
   }
 
@@ -60,8 +60,8 @@ export class ClientsAdminComponent implements OnInit {
     this.formulaireAdd = this.fb.group({
       nomClient: ['', Validators.required],
       prenomClient: ['', Validators.required],
-      telephoneClient: [''],
-      dateNaissanceClient: ['']
+      telephoneClient: ['', Validators.required],
+      dateNaissanceClient: ['', Validators.required]
     });
   }
 
@@ -70,8 +70,10 @@ export class ClientsAdminComponent implements OnInit {
     this.success = null;
     if (this.validateTel(this.formulaireAdd)) {
       this.clientService.createClient(this.clientDto.idClient, this.formulaireAdd.value).subscribe( newClient => {
-        this.success = true;
-        console.log('client créé', newClient);
+        if (newClient != null) {
+          this.success = true;
+          console.log('client créé', newClient);
+        }
       });
     }
   }
@@ -85,6 +87,7 @@ export class ClientsAdminComponent implements OnInit {
     this.success = null;
     if (this.validateTel(this.formulaireMod)) {
       this.clientService.updateClient(this.clientDto.idClient, this.formulaireMod.value).subscribe( cltDto => {
+        console.log(cltDto);
         if (cltDto != null) { this.success = true; }
       });
     }
@@ -122,8 +125,8 @@ export class ClientsAdminComponent implements OnInit {
   }
 
   private validateTel(formulaire: FormGroup): boolean {
-    if (formulaire.controls.telephone) {
-      const tel = formulaire.controls.telephone.value;
+    if (formulaire.controls.telephoneClient.value) {
+      const tel = formulaire.controls.telephoneClient.value;
       const str = tel.toString();
       if (str.length < 8) {
         this.nope = 'Le numéro de téléphone doit comporter au moins 8 chiffres';
