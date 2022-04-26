@@ -1,5 +1,8 @@
 # DevsgbdFront
 
+## What's this app about?
+This is your basic scholar development project: a management application to record sales and generate invoices for a DIY shop.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.8.
 
 ## Development server
